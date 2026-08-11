@@ -77,11 +77,11 @@ Détails complets dans [`backend/README.md`](./backend/README.md) et [`frontend/
 | Rôle                                        | Membre           |
 | ------------------------------------------- | ---------------- |
 | Lead Dev / Architecture                     | Val Clancy Pedro |
-| Backend — annonces & recherche              | À compléter      |
-| Backend — profils, avis & modération        | À compléter      |
-| Frontend — recherche & fiche annonce        | À compléter      |
-| Frontend — espace vendeur & dépôt d'annonce | À compléter      |
-| QA & Tests / Déploiement                    | À compléter      |
+| Backend — annonces & recherche              | Béni Mamonsono   |
+| Backend — profils, avis & modération        | Ceti Louamba     |
+| Frontend — recherche & fiche annonce        | Gaël Yangu       |
+| Frontend — espace vendeur & dépôt d'annonce | Louissel Kitsoro |
+| QA & Tests / Déploiement                    | Victor Aya       |
 
 ## Documentation
 
