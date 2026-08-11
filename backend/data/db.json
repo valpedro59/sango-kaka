@@ -1,0 +1,142 @@
+{
+  "users": [
+    {
+      "id": "user-001",
+      "firstName": "Val",
+      "lastName": "Pedro",
+      "phone": "+242060000001",
+      "whatsapp": "+242060000001",
+      "avatar": null,
+      "bio": "Vendeur de téléphones et accessoires",
+      "isVerified": true,
+      "createdAt": "2025-04-12T10:30:00Z"
+    },
+    {
+      "id": "user-002",
+      "firstName": "Marie",
+      "lastName": "Ngoma",
+      "phone": "+242050000002",
+      "whatsapp": "+242050000002",
+      "avatar": null,
+      "bio": "Je vends des meubles d'occasion",
+      "isVerified": false,
+      "createdAt": "2026-02-10T14:20:00Z"
+    }
+  ],
+
+  "categories": [
+    {
+      "id": "cat-001",
+      "name": "Téléphones",
+      "slug": "telephones",
+      "icon": "mobile-screen-button"
+    },
+    {
+      "id": "cat-002",
+      "name": "Meubles",
+      "slug": "meubles",
+      "icon": "couch"
+    },
+    {
+      "id": "cat-003",
+      "name": "Motos",
+      "slug": "motos",
+      "icon": "motorcycle"
+    },
+    {
+      "id": "cat-004",
+      "name": "Électroménager",
+      "slug": "electromenager",
+      "icon": "plug"
+    }
+  ],
+
+  "neighborhoods": [
+    {
+      "id": "quartier-001",
+      "name": "Tié-Tié",
+      "city": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-002",
+      "name": "Loandjili",
+      "city": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-003",
+      "name": "Mvou-Mvou",
+      "city": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-004",
+      "name": "Centre-ville",
+      "city": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-005",
+      "name": "Talangaï",
+      "city": "Brazzaville"
+    }
+  ],
+
+  "listings": [
+    {
+      "id": "listing-001",
+      "title": "iPhone 13 Pro 256 Go",
+      "description": "iPhone 13 Pro en très bon état. Batterie 88%. Aucun problème technique.",
+      "price": 450000,
+      "currency": "FCFA",
+      "categoryId": "cat-001",
+      "neighborhoodId": "quartier-001",
+      "sellerId": "user-001",
+      "condition": "used",
+      "images": [
+        "/uploads/iphone-13-pro-1.jpg",
+        "/uploads/iphone-13-pro-2.jpg"
+      ],
+      "status": "active",
+      "views": 0,
+      "createdAt": "2026-08-10T10:30:00Z",
+      "updatedAt": "2026-08-10T10:30:00Z"
+    },
+    {
+      "id": "listing-002",
+      "title": "Canapé 3 places",
+      "description": "Canapé en bon état, idéal pour salon.",
+      "price": 180000,
+      "currency": "FCFA",
+      "categoryId": "cat-002",
+      "neighborhoodId": "quartier-002",
+      "sellerId": "user-002",
+      "condition": "used",
+      "images": ["/uploads/canape-1.jpg"],
+      "status": "active",
+      "views": 0,
+      "createdAt": "2026-08-09T14:20:00Z",
+      "updatedAt": "2026-08-09T14:20:00Z"
+    }
+  ],
+
+  "reviews": [
+    {
+      "id": "review-001",
+      "sellerId": "user-001",
+      "authorId": "user-002",
+      "rating": 5,
+      "comment": "Très bon vendeur, transaction rapide.",
+      "createdAt": "2026-07-20T16:00:00Z"
+    }
+  ],
+
+  "reports": [
+    {
+      "id": "report-001",
+      "listingId": "listing-001",
+      "reporterId": "user-002",
+      "reason": "suspected_scam",
+      "description": "Signalement de test.",
+      "status": "pending",
+      "createdAt": "2026-08-11T08:00:00Z"
+    }
+  ]
+}
