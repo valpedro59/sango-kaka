@@ -1,6 +1,201 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
 @import "tailwindcss";
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+/*
+  Palette de référence Sango·Kaka
+  - Bleu #0066CC : accent principal, CTA, prix, vérification
+  - Blanc / gris clair / gris foncé : surfaces et contenu
+  - Vert #1FA766 : réservé au bouton WhatsApp uniquement
+*/
+@theme {
+  --color-brand-50: #eaf3ff;
+  --color-brand-100: #d6e7ff;
+  --color-brand-500: #0066cc;
+  --color-brand-600: #0057b3;
+  --color-brand-700: #004a99;
+  --color-neutral-50: #f5f5f7;
+  --color-neutral-100: #e5e5ea;
+  --color-neutral-300: #d1d1d6;
+  --color-neutral-500: #6e6e73;
+  --color-neutral-900: #1d1d1f;
+  --color-whatsapp-500: #1fa766;
+  --color-whatsapp-600: #178d56;
+  --color-surface-soft: #f5f5f7;
+}
+
+@layer base {
+  :root {
+    /* Palette visuelle centrale du projet */
+    color-scheme: light;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    --primary: #0066cc;
+    --background: #f5f5f7;
+    --surface: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --border: #e5e5ea;
+    --whatsapp: #1fa766;
+
+    /* Rayons de bordure selon la charte */
+    --radius-card: 14px;
+    --radius-button: 12px;
+    --radius-pill: 999px;
+
+    /* Rotation du tampon de vérification */
+    --stamp-rotate: -7deg;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-neutral-50 text-neutral-900 antialiased;
+    background-color: var(--background);
+    color: var(--text);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* Titres et wordmark : Bricolage Grotesque */
+    font-family: "Bricolage Grotesque", "Inter", sans-serif;
+    color: var(--text);
+  }
+
+  .font-mono-tag {
+    /* Tags, quartiers, petites métadonnées : Space Mono */
+    font-family: "Space Mono", "SFMono-Regular", monospace;
+  }
+}
+
+@layer components {
+  /* Conteneur global aligné avec la grille du projet */
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Carte standard des annonces et contenus */
+  .card {
+    @apply rounded-[14px] border border-neutral-100 bg-white shadow-sm shadow-neutral-200/60 transition duration-200 hover:-translate-y-0.5 hover:shadow-md;
+  }
+
+  /* Titre de section conforme à la charte visuelle */
+  .section-title {
+    @apply text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl;
+    font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  }
+
+  /* Sous-titre descriptif */
+  .section-subtitle {
+    @apply mt-2 text-sm text-neutral-500 sm:text-base;
+  }
+
+  /* CTA principal : accent bleu */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-[12px] bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100;
+  }
+
+  /* CTA secondaire : surface blanche */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-[12px] border border-neutral-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-neutral-300 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-200;
+  }
+
+  /* Bouton WhatsApp : vert réservé et distinct */
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#1FA766] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#178d56] focus:outline-none focus:ring-2 focus:ring-emerald-100;
+  }
+
+  /* Badge d’état, catégorie ou signal */
+  .badge {
+    @apply inline-flex items-center rounded-full border border-brand-100 bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-500;
+  }
+
+  /* Tags/filters visuels */
+  .chip {
+    @apply inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs font-medium text-neutral-500;
+  }
+
+  /* Champs de saisie standard */
+  .input-field {
+    @apply w-full rounded-[12px] border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+  }
+
+  /* Zone de texte multi-ligne */
+  .textarea-field {
+    @apply min-h-[110px] w-full rounded-[12px] border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+  }
+
+  /* Indicateur d’état actif */
+  .status-dot {
+    @apply inline-block h-2.5 w-2.5 rounded-full bg-brand-500 ring-4 ring-brand-100;
+  }
+
+  /* Liens de navigation */
+  .nav-link {
+    @apply text-sm font-medium text-neutral-500 transition hover:text-neutral-900;
+  }
+
+  /* Tampon de vérification signature du produit */
+  .verification-stamp {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px dashed var(--primary);
+    background: rgba(0, 102, 204, 0.06);
+    transform: rotate(var(--stamp-rotate));
+    color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.08);
+  }
+
+  .verification-stamp::before {
+    content: "✓";
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+}
+
+@layer utilities {
+  /* Fond léger en grille pour les écrans de mise en page */
+  .bg-grid-soft {
+    background-image:
+      linear-gradient(to right, rgba(110, 110, 115, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(110, 110, 115, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-tag {
+    font-family: "Space Mono", "SFMono-Regular", monospace;
+  }
 }
