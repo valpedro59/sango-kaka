@@ -1,18 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-brand-50: #f0fdfa;
-  --color-brand-100: #ccfbf1;
-  --color-brand-500: #14b8a6;
-  --color-brand-600: #0f766e;
-  --color-brand-700: #115e59;
-  --color-surface-soft: #f8fafc;
+  --color-brand-50: #eaf3ff;
+  --color-brand-100: #d6e7ff;
+  --color-brand-500: #0066cc;
+  --color-brand-600: #0057b3;
+  --color-brand-700: #004a99;
+  --color-neutral-50: #f5f5f7;
+  --color-neutral-100: #e5e5ea;
+  --color-neutral-300: #d1d1d6;
+  --color-neutral-500: #6e6e73;
+  --color-neutral-900: #1d1d1f;
+  --color-whatsapp-500: #1fa766;
+  --color-whatsapp-600: #178d56;
+  --color-surface-soft: #f5f5f7;
 }
 
 @layer base {
   :root {
     color-scheme: light;
     font-family: "Inter", "Segoe UI", sans-serif;
+    --primary: #0066cc;
+    --background: #f5f5f7;
+    --surface: #ffffff;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --border: #e5e5ea;
+    --whatsapp: #1fa766;
+    --radius-card: 14px;
+    --radius-button: 12px;
+    --radius-pill: 999px;
+    --stamp-rotate: -7deg;
   }
 
   html {
@@ -20,7 +39,9 @@
   }
 
   body {
-    @apply m-0 bg-slate-50 text-slate-800 antialiased;
+    @apply m-0 bg-neutral-50 text-neutral-900 antialiased;
+    background-color: var(--background);
+    color: var(--text);
   }
 
   * {
@@ -48,7 +69,12 @@
   h4,
   h5,
   h6 {
-    @apply text-slate-900;
+    font-family: "Bricolage Grotesque", "Inter", sans-serif;
+    color: var(--text);
+  }
+
+  .font-mono-tag {
+    font-family: "Space Mono", "SFMono-Regular", monospace;
   }
 }
 
@@ -58,59 +84,90 @@
   }
 
   .card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-200/70 transition duration-200 hover:-translate-y-0.5 hover:shadow-md;
+    @apply rounded-[14px] border border-neutral-100 bg-white shadow-sm shadow-neutral-200/60 transition duration-200 hover:-translate-y-0.5 hover:shadow-md;
   }
 
   .section-title {
-    @apply text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl;
+    @apply text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl;
+    font-family: "Bricolage Grotesque", "Inter", sans-serif;
   }
 
   .section-subtitle {
-    @apply mt-2 text-sm text-slate-600 sm:text-base;
+    @apply mt-2 text-sm text-neutral-500 sm:text-base;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500/30;
+    @apply inline-flex items-center justify-center gap-2 rounded-[12px] bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-[12px] border border-neutral-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-neutral-300 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-200;
+  }
+
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#1FA766] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#178d56] focus:outline-none focus:ring-2 focus:ring-emerald-100;
   }
 
   .badge {
-    @apply inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-emerald-700;
+    @apply inline-flex items-center rounded-full border border-brand-100 bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-500;
   }
 
   .chip {
-    @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600;
+    @apply inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs font-medium text-neutral-500;
   }
 
   .input-field {
-    @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+    @apply w-full rounded-[12px] border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
   }
 
   .textarea-field {
-    @apply min-h-[110px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+    @apply min-h-[110px] w-full rounded-[12px] border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
   }
 
   .status-dot {
-    @apply inline-block h-2.5 w-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100;
+    @apply inline-block h-2.5 w-2.5 rounded-full bg-brand-500 ring-4 ring-brand-100;
   }
 
   .nav-link {
-    @apply text-sm font-medium text-slate-600 transition hover:text-slate-900;
+    @apply text-sm font-medium text-neutral-500 transition hover:text-neutral-900;
+  }
+
+  .verification-stamp {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px dashed var(--primary);
+    background: rgba(0, 102, 204, 0.06);
+    transform: rotate(var(--stamp-rotate));
+    color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.08);
+  }
+
+  .verification-stamp::before {
+    content: "✓";
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1;
   }
 }
 
 @layer utilities {
   .bg-grid-soft {
     background-image:
-      linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+      linear-gradient(to right, rgba(110, 110, 115, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(110, 110, 115, 0.06) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
   .text-balance {
     text-wrap: balance;
+  }
+
+  .font-tag {
+    font-family: "Space Mono", "SFMono-Regular", monospace;
   }
 }
