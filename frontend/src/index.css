@@ -1,6 +1,116 @@
 @import "tailwindcss";
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+@theme {
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0f766e;
+  --color-brand-700: #115e59;
+  --color-surface-soft: #f8fafc;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-family: "Inter", "Segoe UI", sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply m-0 bg-slate-50 text-slate-800 antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-slate-900;
+  }
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-200/70 transition duration-200 hover:-translate-y-0.5 hover:shadow-md;
+  }
+
+  .section-title {
+    @apply text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl;
+  }
+
+  .section-subtitle {
+    @apply mt-2 text-sm text-slate-600 sm:text-base;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500/30;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-emerald-700;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+  }
+
+  .textarea-field {
+    @apply min-h-[110px] w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+  }
+
+  .status-dot {
+    @apply inline-block h-2.5 w-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-100;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-slate-600 transition hover:text-slate-900;
+  }
+}
+
+@layer utilities {
+  .bg-grid-soft {
+    background-image:
+      linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
 }
