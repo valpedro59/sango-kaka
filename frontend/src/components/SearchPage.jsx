@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import iphoneImage from "../../images/iPhone 12 Pro Max 128 Go.jpg";
 import tabletImage from "../../images/Tablette Samsung A8 64 Go.jpg";
 import motoImage from "../../images/Moto Yamaha 125.jpg";
@@ -100,6 +101,7 @@ const getCategoryFromPath = () => {
 const slugifyCategory = (category) => routeMap[category] || "/";
 
 function SearchPage() {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(() => getCategoryFromPath());
   const [selectedQuarter, setSelectedQuarter] = useState("Tous les quartiers");
   const [selectedBudget, setSelectedBudget] = useState("all");
@@ -161,7 +163,12 @@ function SearchPage() {
 
             <div className="flex items-center gap-3">
               <button className="btn-secondary">Connexion</button>
-              <button className="btn-primary">Publier</button>
+              <button 
+                className="btn-primary"
+                onClick={() => navigate("/depot-annonce")}
+              >
+                Déposer annonce
+              </button>
             </div>
           </div>
         </header>
