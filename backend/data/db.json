@@ -6,7 +6,6 @@
       "lastName": "Pedro",
       "phone": "+242060000001",
       "whatsapp": "+242060000001",
-      "email": "val@example.com",
       "avatar": null,
       "bio": "Vendeur de téléphones et accessoires",
       "isVerified": true,
@@ -18,7 +17,6 @@
       "lastName": "Ngoma",
       "phone": "+242050000002",
       "whatsapp": "+242050000002",
-      "email": "val@example.com",
       "avatar": null,
       "bio": "Je vends des meubles d'occasion",
       "isVerified": false,
@@ -97,7 +95,6 @@
         "/uploads/iphone-13-pro-2.jpg"
       ],
       "status": "active",
-      "isFeatured": false,
       "views": 0,
       "createdAt": "2026-08-10T10:30:00Z",
       "updatedAt": "2026-08-10T10:30:00Z"
@@ -114,7 +111,6 @@
       "condition": "used",
       "images": ["/uploads/canape-1.jpg"],
       "status": "active",
-      "isFeatured": false,
       "views": 0,
       "createdAt": "2026-08-09T14:20:00Z",
       "updatedAt": "2026-08-09T14:20:00Z"
