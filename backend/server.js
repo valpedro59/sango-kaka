@@ -1,20 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+import app from "./src/app.js";
+import dotenv from "dotenv";
 
-const app = express();
+dotenv.config();
 
-const PORT = process.env.PORT || 3001;
-
-// Middlewares
-app.use(cors());
-app.use(express.json());
-
-app.get("/api", (req, res) => {
-  res.json({
-    message: "Api launched",
-  });
-});
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur http://localhost:${PORT}`);
