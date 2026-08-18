@@ -28,7 +28,7 @@ const listings = [
   {
     title: "iPhone 12 Pro Max 128 Go",
     category: "Téléphone",
-    quarter: "Ngaliema",
+    quarter: "Mfilou",
     price: "650 000 FC",
     description: "Très bon état, écran parfait, batterie 90%.",
     image: iphoneImage,
@@ -37,7 +37,7 @@ const listings = [
   {
     title: "Tablette Samsung A8 64 Go",
     category: "Électroménager",
-    quarter: "Kinsasa",
+    quarter: "Mkombo",
     price: "240 000 FC",
     description: "Utilisée 8 mois, coque incluse, prise Congo.",
     image: tabletImage,
@@ -46,7 +46,7 @@ const listings = [
   {
     title: "Moto Yamaha 125",
     category: "Moto",
-    quarter: "Brazza",
+    quarter: "Talangai",
     price: "1 550 000 FC",
     description: "Excellente mécanique, très propre, compteur OK.",
     image: motoImage,
@@ -55,7 +55,7 @@ const listings = [
   {
     title: "Canapé 3 places en tissu",
     category: "Meuble",
-    quarter: "Lemba",
+    quarter: "Mikalou",
     price: "380 000 FC",
     description: "Livraison possible, structure solide, très confortable.",
     image: sofaImage,
@@ -64,7 +64,7 @@ const listings = [
   {
     title: "Machine à laver LG",
     category: "Électroménager",
-    quarter: "Makala",
+    quarter: "Diata",
     price: "520 000 FC",
     description: "Fonctionne parfaitement, plusieurs programmes.",
     image: washingMachineImage,
@@ -73,7 +73,7 @@ const listings = [
   {
     title: "Ordinateur portable Dell",
     category: "Autres",
-    quarter: "Ngaliema",
+    quarter: "poto-poto",
     price: "820 000 FC",
     description: "8 Go RAM, SSD 256 Go, excellente autonomie.",
     image: laptopImage,
