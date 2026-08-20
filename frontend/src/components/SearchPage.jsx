@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import iphoneImage from "../../images/iPhone 12 Pro Max 128 Go.jpg";
-import tabletImage from "../../images/Tablette Samsung A8 64 Go.jpg";
-import motoImage from "../../images/Moto Yamaha 125.jpg";
-import sofaImage from "../../images/Canapé 3 places en tissu .jpg";
-import washingMachineImage from "../../images/Machine à laver LG.jpg";
-import laptopImage from "../../images/Ordinateur portable Dell.jpg";
+import useAnnonces from "../hooks/useAnnonces";
 
 const categories = ["Tous", "Téléphones", "Moto", "Meubles", "Électroménager", "Autres"];
 const quarters = [
@@ -22,63 +17,6 @@ const budgets = [
   { label: "150k - 500k", value: "500000" },
   { label: "500k - 1M", value: "1000000" },
   { label: "1M+", value: "1000000+" },
-];
-
-const listings = [
-  {
-    title: "iPhone 12 Pro Max 128 Go",
-    category: "Téléphone",
-    quarter: "Mfilou",
-    price: "650 000 FC",
-    description: "Très bon état, écran parfait, batterie 90%.",
-    image: iphoneImage,
-    verified: true,
-  },
-  {
-    title: "Tablette Samsung A8 64 Go",
-    category: "Électroménager",
-    quarter: "Mkombo",
-    price: "240 000 FC",
-    description: "Utilisée 8 mois, coque incluse, prise Congo.",
-    image: tabletImage,
-    verified: true,
-  },
-  {
-    title: "Moto Yamaha 125",
-    category: "Moto",
-    quarter: "Talangai",
-    price: "1 550 000 FC",
-    description: "Excellente mécanique, très propre, compteur OK.",
-    image: motoImage,
-    verified: false,
-  },
-  {
-    title: "Canapé 3 places en tissu",
-    category: "Meuble",
-    quarter: "Mikalou",
-    price: "380 000 FC",
-    description: "Livraison possible, structure solide, très confortable.",
-    image: sofaImage,
-    verified: true,
-  },
-  {
-    title: "Machine à laver LG",
-    category: "Électroménager",
-    quarter: "Diata",
-    price: "520 000 FC",
-    description: "Fonctionne parfaitement, plusieurs programmes.",
-    image: washingMachineImage,
-    verified: true,
-  },
-  {
-    title: "Ordinateur portable Dell",
-    category: "Autres",
-    quarter: "poto-poto",
-    price: "820 000 FC",
-    description: "8 Go RAM, SSD 256 Go, excellente autonomie.",
-    image: laptopImage,
-    verified: false,
-  },
 ];
 
 const routeMap = {
@@ -106,6 +44,7 @@ function SearchPage() {
   const [selectedQuarter, setSelectedQuarter] = useState("Tous les quartiers");
   const [selectedBudget, setSelectedBudget] = useState("all");
   const [selectedQuickFilter, setSelectedQuickFilter] = useState("Vérifiés");
+  const { annonces, loading, error } = useAnnonces({ status: "active" });
 
   useEffect(() => {
     const currentRoute = slugifyCategory(selectedCategory);
@@ -277,7 +216,7 @@ function SearchPage() {
             <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="font-tag text-[11px] font-bold uppercase tracking-[0.2em] text-brand-500">
-                  1 248 résultats
+                  Annonces
                 </p>
                 <h2 className="mt-1 text-3xl font-extrabold text-neutral-900">Annonces populaires</h2>
               </div>
@@ -309,40 +248,59 @@ function SearchPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {listings.map((listing) => (
+              {loading && (
+                <p className="col-span-full py-12 text-center text-sm text-neutral-500">
+                  Chargement...
+                </p>
+              )}
+              {error && (
+                <p className="col-span-full py-12 text-center text-sm text-red-500">
+                  {error}
+                </p>
+              )}
+              {!loading && !error && annonces.length === 0 && (
+                <p className="col-span-full py-12 text-center text-sm text-neutral-500">
+                  Aucune annonce pour le moment.
+                </p>
+              )}
+              {!loading && !error && annonces.map((annonce) => (
                 <article
-                  key={listing.title}
-                  className="group overflow-hidden rounded-[14px] border border-neutral-200 bg-white shadow-sm shadow-neutral-200/60 transition duration-200 hover:-translate-y-1 hover:shadow-md"
+                  key={annonce.id}
+                  onClick={() => navigate(`/annonce/${annonce.id}`)}
+                  className="group cursor-pointer overflow-hidden rounded-[14px] border border-neutral-200 bg-white shadow-sm shadow-neutral-200/60 transition duration-200 hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="relative h-40 overflow-hidden bg-neutral-200">
-                    <img
-                      src={listing.image}
-                      alt={listing.title}
-                      className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
-                    />
+                    {annonce.images?.[0] ? (
+                      <img
+                        src={annonce.images[0]}
+                        alt={annonce.title}
+                        className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-neutral-400">
+                        Aucune photo
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-3">
-                      <span className="badge">{listing.category}</span>
-                      {listing.verified && (
-                        <span className="verification-stamp !h-9 !w-9 !border-[1.5px] !bg-white/80" aria-label="Vérifié" />
-                      )}
+                      <span className="badge">{annonce.categoryName}</span>
                     </div>
                   </div>
 
                   <div className="p-4">
                     <div className="flex items-center justify-between gap-2">
                       <span className="font-tag text-[11px] uppercase tracking-[0.14em] text-neutral-500">
-                        {listing.quarter}
+                        {annonce.neighborhoodName}
                       </span>
-                      <span className="text-xs text-neutral-500">2 jours</span>
                     </div>
 
-                    <h3 className="mt-3 text-lg font-extrabold text-neutral-900">{listing.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-neutral-500">{listing.description}</p>
+                    <h3 className="mt-3 text-lg font-extrabold text-neutral-900">{annonce.title}</h3>
+                    <p className="mt-2 line-clamp-2 text-sm leading-6 text-neutral-500">{annonce.description}</p>
 
                     <div className="mt-4 flex items-center justify-between gap-3">
-                      <span className="font-tag text-lg font-bold text-brand-500">{listing.price}</span>
-                      <button className="btn-whatsapp px-3 py-2 text-[11px]">WhatsApp</button>
+                      <span className="font-tag text-lg font-bold text-brand-500">
+                        {annonce.price?.toLocaleString("fr-FR")} {annonce.currency || "FCFA"}
+                      </span>
                     </div>
                   </div>
                 </article>
