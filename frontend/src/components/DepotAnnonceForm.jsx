@@ -1,12 +1,10 @@
 import { useState } from "react";
 
 const categories = [
+  { value: "telephone", label: "Téléphones" },
   { value: "moto", label: "Moto" },
-  { value: "voiture", label: "Voiture" },
-  { value: "telephone", label: "Téléphone" },
-  { value: "electronique", label: "Électronique" },
-  { value: "maison", label: "Maison" },
-  { value: "mode", label: "Mode" },
+  { value: "meuble", label: "Meubles" },
+  { value: "electroménager", label: "Électroménager" },
   { value: "autre", label: "Autre" },
 ];
 
