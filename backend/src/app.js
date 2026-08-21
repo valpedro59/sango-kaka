@@ -1,34 +1,33 @@
 import express from "express";
-import cors from "cors";
 import jsonServer from "json-server";
-import path from "path";
-import { fileURLToPath } from "url";
-import sellerRoutes from "./routes/sellerRoutes.js";
+import cors from "cors";
+import "dotenv/config";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import utilisateursRoutes from "./routes/utilisateurs.js";
+import signalementsRoutes from "./routes/signalements.js";
+import annoncesRoutes from "./routes/annonces.js";
 
 const app = express();
+const router = jsonServer.router("data/db.json");
 
-// Middlewares globaux
-app.use(express.json());
 app.use(cors());
 
-// Route de statut de l'API
-app.get("/api/statut", (req, res) => {
-  res.json({ message: "Api launched" });
-});
+// ---------------------------------------------------------------
+// Routes custom — montées AVANT le router json-server pour que
+// leurs chemins spécifiques (ex: /api/utilisateurs/:id/note-moyenne)
+// soient bien interceptés avant le CRUD générique.
+// Chaque dev backend travaille dans SON fichier sous routes/,
+// pas directement ici, pour éviter les conflits Git.
+// ---------------------------------------------------------------
+app.use("/api/utilisateurs", utilisateursRoutes(router.db));
+app.use("/api/signalements", signalementsRoutes(router.db));
+app.use("/api/annonces", annoncesRoutes(router.db));
 
-// 1. Vos routes personnalisées (AVANT le json-server global)
-app.use("/api/vendeurs", sellerRoutes);
-
-// 2. Configuration de JSON Server pour le reste des données
-const jsonServerRouter = jsonServer.router(
-  path.join(__dirname, "..", "data", "db.json"),
-);
-const jsonServerMiddlewares = jsonServer.defaults();
-
-app.use("/api", jsonServerMiddlewares);
-app.use("/api", jsonServerRouter);
+// ---------------------------------------------------------------
+// CRUD standard généré automatiquement par json-server
+// (annonces, utilisateurs, categories, quartiers, avis, signalements)
+// pour tout ce qui n'est pas intercepté par les routes custom ci-dessus.
+// ---------------------------------------------------------------
+app.use("/api", router);
 
 export default app;
