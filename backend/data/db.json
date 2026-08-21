@@ -1,146 +1,152 @@
 {
-  "users": [
+  "utilisateurs": [
     {
-      "id": "user-001",
-      "firstName": "Val",
-      "lastName": "Pedro",
-      "phone": "+242060000001",
+      "id": "utilisateur-001",
+      "prenom": "Val",
+      "nom": "Pedro",
+      "telephone": "+242060000001",
       "whatsapp": "+242060000001",
       "email": "val@example.com",
       "avatar": null,
       "bio": "Vendeur de téléphones et accessoires",
-      "isVerified": true,
-      "createdAt": "2025-04-12T10:30:00Z"
+      "estVerifie": true,
+      "dateCreation": "2025-04-12T10:30:00Z"
     },
     {
-      "id": "user-002",
-      "firstName": "Marie",
-      "lastName": "Ngoma",
-      "phone": "+242050000002",
+      "id": "utilisateur-002",
+      "prenom": "Marie",
+      "nom": "Ngoma",
+      "telephone": "+242050000002",
       "whatsapp": "+242050000002",
-      "email": "val@example.com",
+      "email": "marie@example.com",
       "avatar": null,
       "bio": "Je vends des meubles d'occasion",
-      "isVerified": false,
-      "createdAt": "2026-02-10T14:20:00Z"
+      "estVerifie": false,
+      "dateCreation": "2026-02-10T14:20:00Z"
     }
   ],
-
   "categories": [
     {
-      "id": "cat-001",
-      "name": "Téléphones",
+      "id": "categorie-001",
+      "nom": "Téléphones",
       "slug": "telephones",
-      "icon": "mobile-screen-button"
+      "icone": "mobile-screen-button"
     },
     {
-      "id": "cat-002",
-      "name": "Meubles",
+      "id": "categorie-002",
+      "nom": "Meubles",
       "slug": "meubles",
-      "icon": "couch"
+      "icone": "couch"
     },
     {
-      "id": "cat-003",
-      "name": "Motos",
+      "id": "categorie-003",
+      "nom": "Motos",
       "slug": "motos",
-      "icon": "motorcycle"
+      "icone": "motorcycle"
     },
     {
-      "id": "cat-004",
-      "name": "Électroménager",
+      "id": "categorie-004",
+      "nom": "Électroménager",
       "slug": "electromenager",
-      "icon": "plug"
+      "icone": "plug"
     }
   ],
-
-  "neighborhoods": [
+  "quartiers": [
     {
       "id": "quartier-001",
-      "name": "Tié-Tié",
-      "city": "Pointe-Noire"
+      "nom": "Tié-Tié",
+      "ville": "Pointe-Noire"
     },
     {
       "id": "quartier-002",
-      "name": "Loandjili",
-      "city": "Pointe-Noire"
+      "nom": "Loandjili",
+      "ville": "Pointe-Noire"
     },
     {
       "id": "quartier-003",
-      "name": "Mvou-Mvou",
-      "city": "Pointe-Noire"
+      "nom": "Mvou-Mvou",
+      "ville": "Pointe-Noire"
     },
     {
       "id": "quartier-004",
-      "name": "Centre-ville",
-      "city": "Pointe-Noire"
+      "nom": "Centre-ville",
+      "ville": "Pointe-Noire"
     },
     {
       "id": "quartier-005",
-      "name": "Talangaï",
-      "city": "Brazzaville"
+      "nom": "Talangaï",
+      "ville": "Brazzaville"
     }
   ],
-
-  "listings": [
+  "annonces": [
     {
-      "id": "listing-001",
-      "title": "iPhone 13 Pro 256 Go",
+      "id": "annonce-001",
+      "titre": "iPhone 13 Pro 256 Go",
       "description": "iPhone 13 Pro en très bon état. Batterie 88%. Aucun problème technique.",
-      "price": 450000,
-      "currency": "FCFA",
-      "categoryId": "cat-001",
-      "neighborhoodId": "quartier-001",
-      "sellerId": "user-001",
-      "condition": "used",
+      "prix": 450000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-001",
+      "vendeurId": "utilisateur-001",
       "images": [
         "/uploads/iphone-13-pro-1.jpg",
         "/uploads/iphone-13-pro-2.jpg"
       ],
-      "status": "active",
-      "isFeatured": false,
-      "views": 0,
-      "createdAt": "2026-08-10T10:30:00Z",
-      "updatedAt": "2026-08-10T10:30:00Z"
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 0,
+      "dateCreation": "2026-08-10T10:30:00Z",
+      "dateMaj": "2026-08-10T10:30:00Z"
     },
     {
-      "id": "listing-002",
-      "title": "Canapé 3 places",
+      "id": "annonce-002",
+      "titre": "Canapé 3 places",
       "description": "Canapé en bon état, idéal pour salon.",
-      "price": 180000,
-      "currency": "FCFA",
-      "categoryId": "cat-002",
-      "neighborhoodId": "quartier-002",
-      "sellerId": "user-002",
-      "condition": "used",
-      "images": ["/uploads/canape-1.jpg"],
-      "status": "active",
-      "isFeatured": false,
-      "views": 0,
-      "createdAt": "2026-08-09T14:20:00Z",
-      "updatedAt": "2026-08-09T14:20:00Z"
-    }
-  ],
-
-  "reviews": [
+      "prix": 180000,
+      "categorieId": "categorie-002",
+      "quartierId": "quartier-002",
+      "vendeurId": "utilisateur-002",
+      "images": [
+        "/uploads/canape-1.jpg"
+      ],
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 0,
+      "dateCreation": "2026-08-09T14:20:00Z",
+      "dateMaj": "2026-08-09T14:20:00Z"
+    },
     {
-      "id": "review-001",
+      "title": "iPhone 19 Pro 256 Go",
+      "description": "iPhone 13 Pro en très bon état. Batterie 88%. Aucun problème technique.",
+      "price": 450000,
+      "categoryId": "cat-001",
+      "quartierId": "quartier-001",
       "sellerId": "user-001",
-      "authorId": "user-002",
-      "rating": 5,
-      "comment": "Très bon vendeur, transaction rapide.",
-      "createdAt": "2026-07-20T16:00:00Z"
+      "images": [
+        "/uploads/iphone-13-pro-1.jpg",
+        "/uploads/iphone-13-pro-2.jpg"
+      ],
+      "id": "YHg9kDc"
     }
   ],
-
-  "reports": [
+  "avis": [
     {
-      "id": "report-001",
-      "listingId": "listing-001",
-      "reporterId": "user-002",
-      "reason": "suspected_scam",
+      "id": "avis-001",
+      "vendeurId": "utilisateur-001",
+      "auteurId": "utilisateur-002",
+      "note": 5,
+      "commentaire": "Très bon vendeur, transaction rapide.",
+      "dateCreation": "2026-07-20T16:00:00Z"
+    }
+  ],
+  "signalements": [
+    {
+      "id": "signalement-001",
+      "annonceId": "annonce-001",
+      "signaleParId": "utilisateur-002",
+      "raison": "arnaque_suspectee",
       "description": "Signalement de test.",
-      "status": "pending",
-      "createdAt": "2026-08-11T08:00:00Z"
+      "statut": "en_attente",
+      "dateCreation": "2026-08-11T08:00:00Z"
     }
   ]
 }
