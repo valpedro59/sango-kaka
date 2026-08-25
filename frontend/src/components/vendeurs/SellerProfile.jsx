@@ -1,6 +1,7 @@
 import SellerRating from "./SellerRating";
 import ReviewCard from "./ReviewCard";
 
+
 const vendeur = {
     id:3,
     nom: "KITSORO Louissel",
@@ -32,6 +33,7 @@ const noteMoyenne = 4.5 ;
 function SellerProfile() {
     return(
         <div className="mx-auto w-full max-w-5xl px-5 md:px-8">
+
             {/* En-tete*/}
             <div className="mb-8">
                 <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#0066CC]">
