@@ -11,6 +11,7 @@ const app = express();
 const router = jsonServer.router("data/db.json");
 
 app.use(cors());
+app.use(express.json());
 
 // ---------------------------------------------------------------
 // Routes custom — montées AVANT le router json-server pour que
