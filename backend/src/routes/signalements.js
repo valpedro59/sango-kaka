@@ -51,5 +51,7 @@ export default function signalementsRoutes(db) {
     res.status(201).json(nouveauSignalement);
   });
 
+  router.use((req, res, next) => next());
+
   return router;
 }

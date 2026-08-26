@@ -37,5 +37,7 @@ export default function annoncesRoutes(db) {
   //   res.json(annonce.value());
   // });
 
+  router.use((req, res, next) => next());
+
   return router;
 }

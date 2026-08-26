@@ -31,5 +31,7 @@ export default function utilisateursRoutes(db) {
   // Ajoute ici toute autre route custom liée aux utilisateurs
   // (ex: badge de vérification, historique des annonces vendues, etc.)
 
+  router.use((req, res, next) => next());
+
   return router;
 }

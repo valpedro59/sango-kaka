@@ -1,4 +1,6 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import jsonServer from "json-server";
 import cors from "cors";
 import "dotenv/config";
@@ -7,11 +9,17 @@ import utilisateursRoutes from "./routes/utilisateurs.js";
 import signalementsRoutes from "./routes/signalements.js";
 import annoncesRoutes from "./routes/annonces.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const router = jsonServer.router("data/db.json");
 
 app.use(cors());
 app.use(express.json());
+
+// Images statiques servies depuis backend/images/
+app.use("/images", express.static(path.join(__dirname, "..", "images")));
 
 // ---------------------------------------------------------------
 // Routes custom — montées AVANT le router json-server pour que

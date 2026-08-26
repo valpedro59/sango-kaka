@@ -23,6 +23,42 @@
       "bio": "Je vends des meubles d'occasion",
       "estVerifie": false,
       "dateCreation": "2026-02-10T14:20:00Z"
+    },
+    {
+      "id": "utilisateur-003",
+      "prenom": "Jean",
+      "nom": "Malonga",
+      "telephone": "+242066408340",
+      "whatsapp": "+242066408340",
+      "email": "jean@example.com",
+      "avatar": null,
+      "bio": "Motos et véhicules d'occasion",
+      "estVerifie": true,
+      "dateCreation": "2025-06-15T08:00:00Z"
+    },
+    {
+      "id": "utilisateur-004",
+      "prenom": "Ceti",
+      "nom": "Louamba",
+      "telephone": "+242055500004",
+      "whatsapp": "+242055500004",
+      "email": "ceti@example.com",
+      "avatar": null,
+      "bio": "Électroménager et électronique",
+      "estVerifie": true,
+      "dateCreation": "2025-09-01T12:00:00Z"
+    },
+    {
+      "id": "utilisateur-005",
+      "prenom": "Gael",
+      "nom": "Yangu",
+      "telephone": "+242061000005",
+      "whatsapp": "+242061000005",
+      "email": "gael@example.com",
+      "avatar": null,
+      "bio": "Informatique et accessoires",
+      "estVerifie": false,
+      "dateCreation": "2026-01-20T09:30:00Z"
     }
   ],
   "categories": [
@@ -49,6 +85,12 @@
       "nom": "Électroménager",
       "slug": "electromenager",
       "icone": "plug"
+    },
+    {
+      "id": "categorie-005",
+      "nom": "Autres",
+      "slug": "autres",
+      "icone": "ellipsis"
     }
   ],
   "quartiers": [
@@ -76,6 +118,31 @@
       "id": "quartier-005",
       "nom": "Talangaï",
       "ville": "Brazzaville"
+    },
+    {
+      "id": "quartier-006",
+      "nom": "Mfilou",
+      "ville": "Brazzaville"
+    },
+    {
+      "id": "quartier-007",
+      "nom": "Mkombo",
+      "ville": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-008",
+      "nom": "Mikalou",
+      "ville": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-009",
+      "nom": "Diata",
+      "ville": "Pointe-Noire"
+    },
+    {
+      "id": "quartier-010",
+      "nom": "Poto-Poto",
+      "ville": "Brazzaville"
     }
   ],
   "annonces": [
@@ -88,8 +155,9 @@
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-001",
       "images": [
-        "/uploads/iphone-13-pro-1.jpg",
-        "/uploads/iphone-13-pro-2.jpg"
+        "https://placehold.co/800x600?text=iPhone+13+Pro+Vue+1",
+        "https://placehold.co/800x600?text=iPhone+13+Pro+Vue+2",
+        "https://placehold.co/800x600?text=iPhone+13+Pro+Vue+3"
       ],
       "statut": "active",
       "estEnAvant": false,
@@ -106,7 +174,9 @@
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-002",
       "images": [
-        "/uploads/canape-1.jpg"
+        "https://placehold.co/800x600?text=Canape+3+places+Vue+1",
+        "https://placehold.co/800x600?text=Canape+3+places+Vue+2",
+        "https://placehold.co/800x600?text=Canape+3+places+Vue+3"
       ],
       "statut": "active",
       "estEnAvant": false,
@@ -115,17 +185,118 @@
       "dateMaj": "2026-08-09T14:20:00Z"
     },
     {
-      "title": "iPhone 19 Pro 256 Go",
-      "description": "iPhone 13 Pro en très bon état. Batterie 88%. Aucun problème technique.",
-      "price": 450000,
-      "categoryId": "cat-001",
-      "quartierId": "quartier-001",
-      "sellerId": "user-001",
+      "id": "annonce-003",
+      "titre": "iPhone 12 Pro Max 128 Go",
+      "description": "Très bon état, écran parfait, batterie 90%.",
+      "prix": 650000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-006",
+      "vendeurId": "utilisateur-001",
       "images": [
-        "/uploads/iphone-13-pro-1.jpg",
-        "/uploads/iphone-13-pro-2.jpg"
+        "/images/iPhone%2012%20Pro%20Max%20128%20Go.jpg",
+        "/images/iPhone%2012%20Pro%20Max%20128%20Go.jpg",
+        "/images/iPhone%2012%20Pro%20Max%20128%20Go.jpg"
       ],
-      "id": "YHg9kDc"
+      "statut": "active",
+      "estEnAvant": true,
+      "vues": 12,
+      "dateCreation": "2026-08-05T09:00:00Z",
+      "dateMaj": "2026-08-05T09:00:00Z"
+    },
+    {
+      "id": "annonce-004",
+      "titre": "Tablette Samsung A8 64 Go",
+      "description": "Utilisée 8 mois, coque incluse, prise Congo.",
+      "prix": 240000,
+      "categorieId": "categorie-004",
+      "quartierId": "quartier-007",
+      "vendeurId": "utilisateur-004",
+      "images": [
+        "/images/Tablette%20Samsung%20A8%2064%20Go.jpg",
+        "/images/Tablette%20Samsung%20A8%2064%20Go.jpg",
+        "/images/Tablette%20Samsung%20A8%2064%20Go.jpg"
+      ],
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 8,
+      "dateCreation": "2026-08-07T11:30:00Z",
+      "dateMaj": "2026-08-07T11:30:00Z"
+    },
+    {
+      "id": "annonce-005",
+      "titre": "Moto Yamaha 125",
+      "description": "Excellente mécanique, très propre, compteur OK.",
+      "prix": 1550000,
+      "categorieId": "categorie-003",
+      "quartierId": "quartier-005",
+      "vendeurId": "utilisateur-003",
+      "images": [
+        "/images/Moto%20Yamaha%20125.jpg",
+        "/images/Moto%20Yamaha%20125.jpg",
+        "/images/Moto%20Yamaha%20125.jpg"
+      ],
+      "statut": "active",
+      "estEnAvant": true,
+      "vues": 34,
+      "dateCreation": "2026-08-03T08:00:00Z",
+      "dateMaj": "2026-08-03T08:00:00Z"
+    },
+    {
+      "id": "annonce-006",
+      "titre": "Canapé 3 places en tissu",
+      "description": "Livraison possible, structure solide, très confortable.",
+      "prix": 380000,
+      "categorieId": "categorie-002",
+      "quartierId": "quartier-008",
+      "vendeurId": "utilisateur-002",
+      "images": [
+        "/images/Canap%C3%A9%203%20places%20en%20tissu%20.jpg",
+        "/images/Canap%C3%A9%203%20places%20en%20tissu%20.jpg",
+        "/images/Canap%C3%A9%203%20places%20en%20tissu%20.jpg"
+      ],
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 5,
+      "dateCreation": "2026-08-06T16:00:00Z",
+      "dateMaj": "2026-08-06T16:00:00Z"
+    },
+    {
+      "id": "annonce-007",
+      "titre": "Machine à laver LG",
+      "description": "Fonctionne parfaitement, plusieurs programmes.",
+      "prix": 520000,
+      "categorieId": "categorie-004",
+      "quartierId": "quartier-009",
+      "vendeurId": "utilisateur-004",
+      "images": [
+        "/images/Machine%20%C3%A0%20laver%20LG.jpg",
+        "/images/Machine%20%C3%A0%20laver%20LG.jpg",
+        "/images/Machine%20%C3%A0%20laver%20LG.jpg"
+      ],
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 15,
+      "dateCreation": "2026-08-04T14:00:00Z",
+      "dateMaj": "2026-08-04T14:00:00Z"
+    },
+    {
+      "id": "annonce-008",
+      "titre": "Ordinateur portable Dell",
+      "description": "8 Go RAM, SSD 256 Go, excellente autonomie.",
+      "prix": 820000,
+      "categorieId": "categorie-005",
+      "quartierId": "quartier-010",
+      "vendeurId": "utilisateur-005",
+      "images": [
+        "/images/Ordinateur%20portable%20Dell.jpg",
+        "/images/Ordinateur%20portable%20Dell.jpg",
+        "/images/Ordinateur%20portable%20Dell.jpg"
+      ],
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 22,
+      "dateCreation": "2026-08-02T10:00:00Z",
+      "dateMaj": "2026-08-02T10:00:00Z"
     }
   ],
   "avis": [
@@ -136,6 +307,30 @@
       "note": 5,
       "commentaire": "Très bon vendeur, transaction rapide.",
       "dateCreation": "2026-07-20T16:00:00Z"
+    },
+    {
+      "id": "avis-002",
+      "vendeurId": "utilisateur-001",
+      "auteurId": "utilisateur-003",
+      "note": 4,
+      "commentaire": "Téléphone conforme à la description, je recommande.",
+      "dateCreation": "2026-08-01T10:00:00Z"
+    },
+    {
+      "id": "avis-003",
+      "vendeurId": "utilisateur-003",
+      "auteurId": "utilisateur-001",
+      "note": 5,
+      "commentaire": "Moto en parfait état, vendeur sérieux et honnête.",
+      "dateCreation": "2026-08-05T14:30:00Z"
+    },
+    {
+      "id": "avis-004",
+      "vendeurId": "utilisateur-004",
+      "auteurId": "utilisateur-005",
+      "note": 4,
+      "commentaire": "Bonne qualité, livraison rapide.",
+      "dateCreation": "2026-08-08T09:15:00Z"
     }
   ],
   "signalements": [

@@ -1,10 +1,9 @@
 import DepotAnnonceForm from "../components/DepotAnnonceForm";
-function DepotAnnoncePage() {
+
+export default function DepotAnnoncePage() {
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       <DepotAnnonceForm />
-    </main>
+    </div>
   );
 }
-
-export default DepotAnnoncePage;
