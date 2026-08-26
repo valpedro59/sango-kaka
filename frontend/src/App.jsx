@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import SearchPage from "./components/SearchPage";
 import DepotAnnoncePage from "./pages/DepotAnnoncePage";
 
+
 function App() {
   return (
     <BrowserRouter>
