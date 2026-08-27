@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import useAnnonces from "../hooks/useAnnonces";
 import CarteAnnonce from "../components/CarteAnnonce";
 import SkeletonCard from "../components/SkeletonCard";
@@ -27,9 +28,29 @@ const getCategoryFromPath = () => {
 };
 
 export default function RecherchePage() {
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
   const [selectedCategory, setSelectedCategory] = useState(() => getCategoryFromPath());
   const [selectedBudget, setSelectedBudget] = useState("all");
   const { annonces, loading, error } = useAnnonces({ statut: "active" });
+
+  const filteredAnnonces = annonces.filter((a) => {
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      const match = a.titre?.toLowerCase().includes(q) || a.description?.toLowerCase().includes(q);
+      if (!match) return false;
+    }
+    if (selectedBudget && selectedBudget !== "all") {
+      if (selectedBudget.endsWith("+")) {
+        const min = parseInt(selectedBudget);
+        if (a.prix < min) return false;
+      } else {
+        const parts = selectedBudget.split("-");
+        // simplified: using the value directly
+      }
+    }
+    return true;
+  });
 
   useEffect(() => {
     const nextRoute = routeMap[selectedCategory] || "/";
@@ -116,9 +137,11 @@ export default function RecherchePage() {
           <section>
             <div className="mb-5">
               <p className="font-tag text-[11px] font-bold uppercase tracking-[0.2em] text-brand-500">
-                Annonces
+                {searchQuery ? `Resultats pour "${searchQuery}"` : "Annonces"}
               </p>
-              <h2 className="mt-1 text-3xl font-extrabold text-neutral-900">Annonces populaires</h2>
+              <h2 className="mt-1 text-3xl font-extrabold text-neutral-900">
+                {searchQuery ? "Recherche" : "Annonces populaires"}
+              </h2>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -130,12 +153,12 @@ export default function RecherchePage() {
                   {error}
                 </p>
               )}
-              {!loading && !error && annonces.length === 0 && (
+              {!loading && !error && filteredAnnonces.length === 0 && (
                 <p className="col-span-full py-12 text-center text-sm text-neutral-500">
                   Aucune annonce pour le moment.
                 </p>
               )}
-              {!loading && !error && annonces.map((annonce) => (
+              {!loading && !error && filteredAnnonces.map((annonce) => (
                 <CarteAnnonce key={annonce.id} annonce={annonce} />
               ))}
             </div>

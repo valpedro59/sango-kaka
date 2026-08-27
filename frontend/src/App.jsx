@@ -7,6 +7,7 @@ import RecherchePage from "./pages/RecherchePage";
 import DepotAnnoncePage from "./pages/DepotAnnoncePage";
 import FicheAnnoncePage from "./pages/FicheAnnoncePage";
 
+
 function App() {
   return (
     <BrowserRouter>
