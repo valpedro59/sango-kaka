@@ -87,10 +87,7 @@
       "categorieId": "categorie-001",
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-001",
-      "images": [
-        "/uploads/iphone-13-pro-1.jpg",
-        "/uploads/iphone-13-pro-2.jpg"
-      ],
+      "images": ["/images/iphone-13pro.png"],
       "statut": "active",
       "estEnAvant": false,
       "vues": 3,
@@ -105,25 +102,12 @@
       "categorieId": "categorie-002",
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-002",
-      "images": ["/uploads/canape-1.jpg"],
+      "images": ["/images/canape.jpeg"],
       "statut": "active",
       "estEnAvant": false,
       "vues": 0,
       "dateCreation": "2026-08-09T14:20:00Z",
       "dateMaj": "2026-08-09T14:20:00Z"
-    },
-    {
-      "title": "iPhone 19 Pro 256 Go",
-      "description": "iPhone 13 Pro en très bon état. Batterie 88%. Aucun problème technique.",
-      "price": 450000,
-      "categoryId": "cat-001",
-      "quartierId": "quartier-001",
-      "sellerId": "user-001",
-      "images": [
-        "/uploads/iphone-13-pro-1.jpg",
-        "/uploads/iphone-13-pro-2.jpg"
-      ],
-      "id": "YHg9kDc"
     }
   ],
   "avis": [
