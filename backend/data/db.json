@@ -105,9 +105,7 @@
       "categorieId": "categorie-002",
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-002",
-      "images": [
-        "/uploads/canape-1.jpg"
-      ],
+      "images": ["/uploads/canape-1.jpg"],
       "statut": "active",
       "estEnAvant": false,
       "vues": 0,

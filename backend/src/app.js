@@ -22,6 +22,12 @@ const jsonServerMiddlewares = jsonServer.defaults();
 app.use(cors());
 app.use(jsonServerMiddlewares); // <-- Gère le body parser pour TOUTE l'application
 
+// Requetes dossiers images
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "..", "public", "images")),
+);
+
 // 3. Vos routes personnalisées (req.body sera parfaitement accessible ici)
 app.use("/api/utilisateurs", utilisateursRoutes(router.db));
 app.use("/api/signalements", signalementsRoutes(router.db));
