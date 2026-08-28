@@ -4,11 +4,20 @@ import FicheAnnonce from "../components/FicheAnnonce";
 
 function FicheAnnoncePage() {
   const { id } = useParams();
-  const { listing, seller, reviews, averageRating, categories, quartiers, loading, error } = useAnnonce(id);
+  const {
+    annonce,
+    seller,
+    reviews,
+    averageRating,
+    categories,
+    quartiers,
+    loading,
+    error,
+  } = useAnnonce(id);
 
   return (
     <FicheAnnonce
-      listing={listing}
+      annonce={annonce}
       seller={seller}
       reviews={reviews}
       averageRating={averageRating}

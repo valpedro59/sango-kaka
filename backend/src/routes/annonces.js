@@ -18,21 +18,24 @@ export default function annoncesRoutes(db) {
   // (titre + description) que les query params json-server ne
   // couvrent pas nativement.
   //
-  // router.get('/recherche', (req, res) => {
-  //   const { q } = req.query;
-  //   const resultats = db.get('annonces')
-  //     .filter(a =>
-  //       a.titre.toLowerCase().includes(q.toLowerCase()) ||
-  //       a.description.toLowerCase().includes(q.toLowerCase())
-  //     )
-  //     .value();
-  //   res.json(resultats);
-  // });
+  router.get("/recherche", (req, res) => {
+    const { q } = req.query;
+    const resultats = db
+      .get("annonces")
+      .filter(
+        (a) =>
+          a.titre.toLowerCase().includes(q.toLowerCase()) ||
+          a.description.toLowerCase().includes(q.toLowerCase()),
+      )
+      .value();
+    res.json(resultats);
+  });
 
   // Exemple : incrémenter les vues d'une annonce à chaque consultation
-  // router.post('/:id/vue', (req, res) => {
-  //   const annonce = db.get('annonces').find({ id: req.params.id });
-  //   if (!annonce.value()) return res.status(404).json({ error: 'Annonce introuvable' });
+  // router.post("/:id/vue", (req, res) => {
+  //   const annonce = db.get("annonces").find({ id: req.params.id });
+  //   if (!annonce.value())
+  //     return res.status(404).json({ error: "Annonce introuvable" });
   //   annonce.assign({ vues: annonce.value().vues + 1 }).write();
   //   res.json(annonce.value());
   // });

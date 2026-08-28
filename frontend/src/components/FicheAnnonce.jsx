@@ -5,8 +5,18 @@ import { buildWhatsAppLink } from "../utils/whatsapp";
 
 const NO_PHOTO_SVG = (
   <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-neutral-100 text-neutral-400">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-16 w-16">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      className="h-16 w-16"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
+      />
     </svg>
     <span className="text-sm font-medium">Pas de photo</span>
   </div>
@@ -104,7 +114,11 @@ function GaleriePhotos({ images, title }) {
                   : "border-transparent opacity-60 hover:opacity-100"
               }`}
             >
-              <SafeImage src={src} alt="" className="h-full w-full object-cover" />
+              <SafeImage
+                src={src}
+                alt=""
+                className="h-full w-full object-cover"
+              />
             </button>
           ))}
         </div>
@@ -122,7 +136,8 @@ function CarteVendeur({ seller, averageRating }) {
 
       <div className="flex items-center gap-3">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-base font-bold text-brand-500">
-          {seller?.prenom?.[0]}{seller?.nom?.[0]}
+          {seller?.prenom?.[0]}
+          {seller?.nom?.[0]}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -174,7 +189,10 @@ function ListeAvis({ reviews }) {
       </h3>
       <div className="space-y-4">
         {reviews.map((review) => (
-          <div key={review.id} className="border-b border-neutral-100 pb-3 last:border-0 last:pb-0">
+          <div
+            key={review.id}
+            className="border-b border-neutral-100 pb-3 last:border-0 last:pb-0"
+          >
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-neutral-900">
                 {review.authorName}
@@ -191,7 +209,16 @@ function ListeAvis({ reviews }) {
   );
 }
 
-export default function FicheAnnonce({ listing, seller, reviews, averageRating, categories, quartiers, loading, error }) {
+export default function FicheAnnonce({
+  listing,
+  seller,
+  reviews,
+  averageRating,
+  categories,
+  quartiers,
+  loading,
+  error,
+}) {
   const navigate = useNavigate();
   const [showReportModal, setShowReportModal] = useState(false);
   const [reportReason, setReportReason] = useState("");
@@ -206,11 +233,15 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
     if (!listing?.id || viewCountedRef.current) return;
     viewCountedRef.current = true;
 
-    AnnonceAPI.patch(listing.id, { vues: (listing.vues || 0) + 1 }).catch(() => {});
+    AnnonceAPI.patch(listing.id, { vues: (listing.vues || 0) + 1 }).catch(
+      () => {},
+    );
   }, [listing?.id]);
 
-  const categoryName = categories?.find((c) => c.id === listing?.categorieId)?.nom || null;
-  const quartierName = quartiers?.find((q) => q.id === listing?.quartierId)?.nom || null;
+  const categoryName =
+    categories?.find((c) => c.id === listing?.categorieId)?.nom || null;
+  const quartierName =
+    quartiers?.find((q) => q.id === listing?.quartierId)?.nom || null;
 
   async function handleReport(e) {
     e.preventDefault();
@@ -219,7 +250,10 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
     setSendingReport(true);
     setReportError(null);
     try {
-      await SignalementAPI.create({ annonceId: listing.id, raison: reportReason.trim() });
+      await SignalementAPI.create({
+        annonceId: listing.id,
+        raison: reportReason.trim(),
+      });
       setReportSent(true);
     } catch {
       setReportError("Erreur lors de l'envoi du signalement.");
@@ -247,7 +281,10 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
           <p className="text-center text-sm text-neutral-500">
             {error || "Annonce introuvable."}
           </p>
-          <button onClick={() => navigate("/")} className="btn-secondary mx-auto mt-4">
+          <button
+            onClick={() => navigate("/")}
+            className="btn-secondary mx-auto mt-4"
+          >
             Retour
           </button>
         </div>
@@ -263,7 +300,11 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
           className="mb-5 flex items-center gap-2 text-sm font-medium text-neutral-500 transition hover:text-neutral-900"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
-            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+            <path
+              fillRule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+              clipRule="evenodd"
+            />
           </svg>
           Retour
         </button>
@@ -293,7 +334,9 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
                     {quartierName}
                   </span>
                 )}
-                {quartierName && <span className="h-1 w-1 rounded-full bg-neutral-300" />}
+                {quartierName && (
+                  <span className="h-1 w-1 rounded-full bg-neutral-300" />
+                )}
                 <span>{formatDate(listing.dateCreation)}</span>
                 <span className="h-1 w-1 rounded-full bg-neutral-300" />
                 <span>{listing.vues || 0} vues</span>
@@ -323,8 +366,16 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
                 onClick={() => setShowReportModal(true)}
                 className="mt-4 flex items-center gap-2 text-xs font-medium text-neutral-500 transition hover:text-red-600"
               >
-                <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
-                  <path fillRule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3zm4 1v12h6V4H7z" clipRule="evenodd" />
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="h-4 w-4"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 3a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V3zm4 1v12h6V4H7z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 Signaler cette annonce
               </button>
@@ -345,18 +396,35 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
               <div className="text-center">
                 <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-50">
                   <svg viewBox="0 0 20 20" fill="#16a34a" className="h-6 w-6">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
-                <h3 className="text-lg font-extrabold text-neutral-900">Merci</h3>
-                <p className="mt-2 text-sm text-neutral-500">Votre signalement a été envoyé.</p>
-                <button onClick={() => { setShowReportModal(false); setReportSent(false); setReportReason(""); }} className="btn-primary mt-4">
+                <h3 className="text-lg font-extrabold text-neutral-900">
+                  Merci
+                </h3>
+                <p className="mt-2 text-sm text-neutral-500">
+                  Votre signalement a été envoyé.
+                </p>
+                <button
+                  onClick={() => {
+                    setShowReportModal(false);
+                    setReportSent(false);
+                    setReportReason("");
+                  }}
+                  className="btn-primary mt-4"
+                >
                   Fermer
                 </button>
               </div>
             ) : (
               <form onSubmit={handleReport}>
-                <h3 className="text-lg font-extrabold text-neutral-900">Signaler l'annonce</h3>
+                <h3 className="text-lg font-extrabold text-neutral-900">
+                  Signaler l'annonce
+                </h3>
                 <p className="mt-1 text-sm text-neutral-500">
                   Décrivez le problème pour nous aider à modérer.
                 </p>
@@ -368,12 +436,22 @@ export default function FicheAnnonce({ listing, seller, reviews, averageRating, 
                   className="textarea-field mt-4"
                   required
                 />
-                {reportError && <p className="mt-2 text-xs text-red-600">{reportError}</p>}
+                {reportError && (
+                  <p className="mt-2 text-xs text-red-600">{reportError}</p>
+                )}
                 <div className="mt-4 flex gap-3">
-                  <button type="button" onClick={() => setShowReportModal(false)} className="btn-secondary flex-1">
+                  <button
+                    type="button"
+                    onClick={() => setShowReportModal(false)}
+                    className="btn-secondary flex-1"
+                  >
                     Annuler
                   </button>
-                  <button type="submit" disabled={sendingReport} className="btn-primary flex-1">
+                  <button
+                    type="submit"
+                    disabled={sendingReport}
+                    className="btn-primary flex-1"
+                  >
                     {sendingReport ? "Envoi..." : "Envoyer"}
                   </button>
                 </div>
