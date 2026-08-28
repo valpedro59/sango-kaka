@@ -155,13 +155,13 @@
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-001",
       "images": [
-        "https://placehold.co/800x600?text=iPhone+13+Pro+Vue+1",
+        "/images/iphone-13pro.png",
         "https://placehold.co/800x600?text=iPhone+13+Pro+Vue+2",
         "https://placehold.co/800x600?text=iPhone+13+Pro+Vue+3"
       ],
       "statut": "active",
       "estEnAvant": false,
-      "vues": 0,
+      "vues": 3,
       "dateCreation": "2026-08-10T10:30:00Z",
       "dateMaj": "2026-08-10T10:30:00Z"
     },
@@ -174,7 +174,7 @@
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-002",
       "images": [
-        "https://placehold.co/800x600?text=Canape+3+places+Vue+1",
+        "/images/canape.jpeg",
         "https://placehold.co/800x600?text=Canape+3+places+Vue+2",
         "https://placehold.co/800x600?text=Canape+3+places+Vue+3"
       ],
