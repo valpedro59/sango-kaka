@@ -1,16 +1,16 @@
 import express from "express";
-import jsonServer from "json-server";
-import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-
-// Gestion de __dirname obligatoire en modules ES (import/export)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import jsonServer from "json-server";
+import cors from "cors";
 
 import utilisateursRoutes from "./routes/utilisateurs.js";
 import signalementsRoutes from "./routes/signalements.js";
 import annoncesRoutes from "./routes/annonces.js";
+
+// Gestion de __dirname obligatoire en modules ES (import/export)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -22,13 +22,11 @@ const jsonServerMiddlewares = jsonServer.defaults({ bodyParser: true });
 app.use(cors());
 app.use(jsonServerMiddlewares); // <-- Gère le body parser pour TOUTE l'application
 
-// Requetes dossiers images
-app.use(
-  "/images",
-  express.static(path.join(__dirname, "..", "public", "images")),
-);
+// Images statiques servies depuis backend/public/images et backend/images
+app.use("/images", express.static(path.join(__dirname, "..", "public", "images")));
+app.use("/images", express.static(path.join(__dirname, "..", "images")));
 
-// 3. Vos routes personnalisées (req.body sera parfaitement accessible ici)
+// 3. Routes personnalisées (montées avant le router json-server)
 app.use("/api/utilisateurs", utilisateursRoutes(router.db));
 app.use("/api/signalements", signalementsRoutes(router.db));
 app.use("/api/annonces", annoncesRoutes(router.db));

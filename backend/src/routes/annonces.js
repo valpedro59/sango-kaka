@@ -83,5 +83,7 @@ export default function annoncesRoutes(db) {
     res.json(resultats);
   });
 
+  router.use((req, res, next) => next());
+
   return router;
 }

@@ -54,5 +54,7 @@ export default function utilisateursRoutes(db) {
     res.status(201).json(nouvelUtilisateur);
   });
 
+  router.use((req, res, next) => next());
+
   return router;
 }
