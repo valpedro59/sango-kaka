@@ -23,6 +23,78 @@
       "bio": "Je vends des meubles d'occasion",
       "estVerifie": false,
       "dateCreation": "2026-02-10T14:20:00Z"
+    },
+    {
+      "id": "utilisateur-003",
+      "prenom": "Jason",
+      "nom": "Brown",
+      "telephone": "+242060000003",
+      "whatsapp": "+242060000003",
+      "email": "jason.brown@example.com",
+      "avatar": null,
+      "bio": "Passionné d'électroménager reconditionné",
+      "estVerifie": false,
+      "dateCreation": "2026-08-31T08:21:22.166Z"
+    },
+    {
+      "id": "utilisateur-004",
+      "prenom": "Grâce",
+      "nom": "Milandou",
+      "telephone": "+242044000004",
+      "whatsapp": "+242044000004",
+      "email": "grace.milandou@example.com",
+      "avatar": null,
+      "bio": "Revendeuse de téléphones et accessoires high-tech",
+      "estVerifie": true,
+      "dateCreation": "2026-03-05T09:15:00Z"
+    },
+    {
+      "id": "utilisateur-005",
+      "prenom": "Fabrice",
+      "nom": "Loemba",
+      "telephone": "+242066000005",
+      "whatsapp": "+242066000005",
+      "email": "fabrice.loemba@example.com",
+      "avatar": null,
+      "bio": "Mécanicien, je vends aussi des motos d'occasion",
+      "estVerifie": false,
+      "dateCreation": "2026-04-18T11:40:00Z"
+    },
+    {
+      "id": "utilisateur-006",
+      "prenom": "Sandra",
+      "nom": "Bakala",
+      "telephone": "+242055000006",
+      "whatsapp": "+242055000006",
+      "email": "sandra.bakala@example.com",
+      "avatar": null,
+      "bio": "Vends du mobilier de qualité, quartier Loandjili",
+      "estVerifie": true,
+      "dateCreation": "2026-05-02T16:00:00Z"
+    },
+    {
+      "id": "utilisateur-007",
+      "prenom": "Patrick",
+      "nom": "Nkounkou",
+      "telephone": "+242077000007",
+      "whatsapp": "+242077000007",
+      "email": "patrick.nkounkou@example.com",
+      "avatar": null,
+      "bio": "Vends motos et pièces détachées",
+      "estVerifie": false,
+      "dateCreation": "2026-06-14T13:25:00Z"
+    },
+    {
+      "id": "utilisateur-008",
+      "prenom": "Chancelvie",
+      "nom": "Moukala",
+      "telephone": "+242068000008",
+      "whatsapp": "+242068000008",
+      "email": "chancelvie.moukala@example.com",
+      "avatar": null,
+      "bio": "Étudiante, je revends mes affaires en fin d'année",
+      "estVerifie": true,
+      "dateCreation": "2026-07-01T10:00:00Z"
     }
   ],
   "categories": [
@@ -52,31 +124,11 @@
     }
   ],
   "quartiers": [
-    {
-      "id": "quartier-001",
-      "nom": "Tié-Tié",
-      "ville": "Pointe-Noire"
-    },
-    {
-      "id": "quartier-002",
-      "nom": "Loandjili",
-      "ville": "Pointe-Noire"
-    },
-    {
-      "id": "quartier-003",
-      "nom": "Mvou-Mvou",
-      "ville": "Pointe-Noire"
-    },
-    {
-      "id": "quartier-004",
-      "nom": "Centre-ville",
-      "ville": "Pointe-Noire"
-    },
-    {
-      "id": "quartier-005",
-      "nom": "Talangaï",
-      "ville": "Brazzaville"
-    }
+    { "id": "quartier-001", "nom": "Tié-Tié", "ville": "Pointe-Noire" },
+    { "id": "quartier-002", "nom": "Loandjili", "ville": "Pointe-Noire" },
+    { "id": "quartier-003", "nom": "Mvou-Mvou", "ville": "Pointe-Noire" },
+    { "id": "quartier-004", "nom": "Centre-ville", "ville": "Pointe-Noire" },
+    { "id": "quartier-005", "nom": "Talangaï", "ville": "Brazzaville" }
   ],
   "annonces": [
     {
@@ -87,7 +139,7 @@
       "categorieId": "categorie-001",
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-001",
-      "images": ["/images/iphone-13pro.png"],
+      "image": "/images/iphone-13pro.png",
       "statut": "active",
       "estEnAvant": false,
       "vues": 3,
@@ -102,12 +154,222 @@
       "categorieId": "categorie-002",
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-002",
-      "images": ["/images/canape.jpeg"],
+      "image": "/images/canape.jpeg",
       "statut": "active",
       "estEnAvant": false,
       "vues": 0,
       "dateCreation": "2026-08-09T14:20:00Z",
       "dateMaj": "2026-08-09T14:20:00Z"
+    },
+    {
+      "id": "annonce-003",
+      "titre": "Samsung Galaxy A54",
+      "description": "Acheté il y a 6 mois, coque et protection d'écran incluses.",
+      "prix": 220000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-003",
+      "vendeurId": "utilisateur-004",
+      "image": "/images/galaxy-a54.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 12,
+      "dateCreation": "2026-08-15T09:00:00Z",
+      "dateMaj": "2026-08-15T09:00:00Z"
+    },
+    {
+      "id": "annonce-004",
+      "titre": "Moto Yamaha 125cc",
+      "description": "Bon état général, entretien à jour, papiers en règle.",
+      "prix": 650000,
+      "categorieId": "categorie-003",
+      "quartierId": "quartier-001",
+      "vendeurId": "utilisateur-005",
+      "image": "/images/yamaha-125.jpg",
+      "statut": "active",
+      "estEnAvant": true,
+      "vues": 27,
+      "dateCreation": "2026-08-05T08:10:00Z",
+      "dateMaj": "2026-08-20T12:00:00Z"
+    },
+    {
+      "id": "annonce-005",
+      "titre": "Réfrigérateur Samsung 300L",
+      "description": "Très peu utilisé, aucun défaut, double porte.",
+      "prix": 275000,
+      "categorieId": "categorie-004",
+      "quartierId": "quartier-004",
+      "vendeurId": "utilisateur-003",
+      "image": "/images/refrigerateur-samsung.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 8,
+      "dateCreation": "2026-08-18T15:45:00Z",
+      "dateMaj": "2026-08-18T15:45:00Z"
+    },
+    {
+      "id": "annonce-006",
+      "titre": "Table à manger 6 places",
+      "description": "Table en bois massif avec 6 chaises assorties.",
+      "prix": 150000,
+      "categorieId": "categorie-002",
+      "quartierId": "quartier-005",
+      "vendeurId": "utilisateur-006",
+      "image": "/images/table-6places.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 5,
+      "dateCreation": "2026-08-20T10:00:00Z",
+      "dateMaj": "2026-08-20T10:00:00Z"
+    },
+    {
+      "id": "annonce-007",
+      "titre": "iPhone 11 64 Go",
+      "description": "Batterie changée récemment, quelques micro-rayures sur le dos.",
+      "prix": 180000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-002",
+      "vendeurId": "utilisateur-007",
+      "image": "/images/iphone-11.jpg",
+      "statut": "vendue",
+      "estEnAvant": false,
+      "vues": 34,
+      "dateCreation": "2026-07-28T09:30:00Z",
+      "dateMaj": "2026-08-22T17:00:00Z"
+    },
+    {
+      "id": "annonce-008",
+      "titre": "Moto Honda CG 125",
+      "description": "Moto solide, idéale pour usage quotidien ou taxi-moto.",
+      "prix": 480000,
+      "categorieId": "categorie-003",
+      "quartierId": "quartier-003",
+      "vendeurId": "utilisateur-008",
+      "image": "/images/honda-cg125.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 19,
+      "dateCreation": "2026-08-12T13:00:00Z",
+      "dateMaj": "2026-08-12T13:00:00Z"
+    },
+    {
+      "id": "annonce-009",
+      "titre": "Congélateur Whirlpool",
+      "description": "Congélateur coffre, bon état, fonctionne parfaitement.",
+      "prix": 195000,
+      "categorieId": "categorie-004",
+      "quartierId": "quartier-001",
+      "vendeurId": "utilisateur-002",
+      "image": "/images/congelateur-whirlpool.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 6,
+      "dateCreation": "2026-08-22T09:00:00Z",
+      "dateMaj": "2026-08-22T09:00:00Z"
+    },
+    {
+      "id": "annonce-010",
+      "titre": "Lit double avec matelas",
+      "description": "Lit en bois avec matelas orthopédique, très confortable.",
+      "prix": 120000,
+      "categorieId": "categorie-002",
+      "quartierId": "quartier-004",
+      "vendeurId": "utilisateur-005",
+      "image": "/images/lit-double.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 4,
+      "dateCreation": "2026-08-24T11:30:00Z",
+      "dateMaj": "2026-08-24T11:30:00Z"
+    },
+    {
+      "id": "annonce-011",
+      "titre": "Samsung Galaxy S21",
+      "description": "Écran impeccable, livré avec chargeur et boîte d'origine.",
+      "prix": 320000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-005",
+      "vendeurId": "utilisateur-006",
+      "image": "/images/galaxy-s21.jpg",
+      "statut": "active",
+      "estEnAvant": true,
+      "vues": 21,
+      "dateCreation": "2026-08-25T14:00:00Z",
+      "dateMaj": "2026-08-25T14:00:00Z"
+    },
+    {
+      "id": "annonce-012",
+      "titre": "Climatiseur split 1.5 CV",
+      "description": "Climatiseur récent, faible consommation, installation possible.",
+      "prix": 210000,
+      "categorieId": "categorie-004",
+      "quartierId": "quartier-002",
+      "vendeurId": "utilisateur-004",
+      "image": "/images/climatiseur-split.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 9,
+      "dateCreation": "2026-08-26T16:15:00Z",
+      "dateMaj": "2026-08-26T16:15:00Z"
+    },
+    {
+      "id": "annonce-013",
+      "titre": "Moto Sanya 150cc",
+      "description": "Moto vendue avec casque et documents à jour.",
+      "prix": 550000,
+      "categorieId": "categorie-003",
+      "quartierId": "quartier-004",
+      "vendeurId": "utilisateur-007",
+      "image": "/images/sanya-150.jpg",
+      "statut": "vendue",
+      "estEnAvant": false,
+      "vues": 15,
+      "dateCreation": "2026-08-06T10:20:00Z",
+      "dateMaj": "2026-08-27T09:00:00Z"
+    },
+    {
+      "id": "annonce-014",
+      "titre": "Lot de 4 chaises de salon",
+      "description": "Chaises rembourrées, très peu servies.",
+      "prix": 80000,
+      "categorieId": "categorie-002",
+      "quartierId": "quartier-001",
+      "vendeurId": "utilisateur-008",
+      "image": "/images/chaises-salon.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 2,
+      "dateCreation": "2026-08-28T08:45:00Z",
+      "dateMaj": "2026-08-28T08:45:00Z"
+    },
+    {
+      "id": "annonce-015",
+      "titre": "iPhone 13 Pro 256 Go - PRIX CASSÉ",
+      "description": "Vente urgente, prix largement en dessous du marché.",
+      "prix": 50000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-003",
+      "vendeurId": "utilisateur-003",
+      "image": "/images/iphone-13pro-suspect.jpg",
+      "statut": "signalee",
+      "estEnAvant": false,
+      "vues": 41,
+      "dateCreation": "2026-08-27T18:00:00Z",
+      "dateMaj": "2026-08-29T09:00:00Z"
+    },
+    {
+      "id": "annonce-016",
+      "titre": "Micro-ondes Samsung",
+      "description": "Fonctionne très bien, quelques traces d'usage esthétiques.",
+      "prix": 65000,
+      "categorieId": "categorie-004",
+      "quartierId": "quartier-005",
+      "vendeurId": "utilisateur-002",
+      "image": "/images/micro-ondes-samsung.jpg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 3,
+      "dateCreation": "2026-08-29T12:00:00Z",
+      "dateMaj": "2026-08-29T12:00:00Z"
     }
   ],
   "avis": [
@@ -118,6 +380,62 @@
       "note": 5,
       "commentaire": "Très bon vendeur, transaction rapide.",
       "dateCreation": "2026-07-20T16:00:00Z"
+    },
+    {
+      "id": "avis-002",
+      "vendeurId": "utilisateur-001",
+      "auteurId": "utilisateur-004",
+      "note": 4,
+      "commentaire": "Bon échange, léger retard au rendez-vous.",
+      "dateCreation": "2026-08-01T10:00:00Z"
+    },
+    {
+      "id": "avis-003",
+      "vendeurId": "utilisateur-002",
+      "auteurId": "utilisateur-001",
+      "note": 3,
+      "commentaire": "Correct, communication un peu lente.",
+      "dateCreation": "2026-08-11T09:00:00Z"
+    },
+    {
+      "id": "avis-004",
+      "vendeurId": "utilisateur-004",
+      "auteurId": "utilisateur-006",
+      "note": 5,
+      "commentaire": "Excellent, produit conforme à la description.",
+      "dateCreation": "2026-08-16T14:00:00Z"
+    },
+    {
+      "id": "avis-005",
+      "vendeurId": "utilisateur-004",
+      "auteurId": "utilisateur-007",
+      "note": 4,
+      "commentaire": "Vendeuse sérieuse, je recommande.",
+      "dateCreation": "2026-08-19T11:30:00Z"
+    },
+    {
+      "id": "avis-006",
+      "vendeurId": "utilisateur-005",
+      "auteurId": "utilisateur-003",
+      "note": 2,
+      "commentaire": "Moto pas tout à fait conforme à l'annonce.",
+      "dateCreation": "2026-08-21T08:00:00Z"
+    },
+    {
+      "id": "avis-007",
+      "vendeurId": "utilisateur-006",
+      "auteurId": "utilisateur-008",
+      "note": 5,
+      "commentaire": "Meubles impeccables, livraison rapide.",
+      "dateCreation": "2026-08-23T15:00:00Z"
+    },
+    {
+      "id": "avis-008",
+      "vendeurId": "utilisateur-006",
+      "auteurId": "utilisateur-001",
+      "note": 5,
+      "commentaire": "Très professionnelle, au top.",
+      "dateCreation": "2026-08-26T13:00:00Z"
     }
   ],
   "signalements": [
@@ -129,6 +447,51 @@
       "description": "Signalement de test.",
       "statut": "en_attente",
       "dateCreation": "2026-08-11T08:00:00Z"
+    },
+    {
+      "id": "signalement-002",
+      "annonceId": "annonce-015",
+      "signaleParId": "utilisateur-002",
+      "raison": "arnaque_suspectee",
+      "description": "Prix beaucoup trop bas pour un iPhone 13 Pro, probable arnaque.",
+      "statut": "en_attente",
+      "dateCreation": "2026-08-27T19:00:00Z"
+    },
+    {
+      "id": "signalement-003",
+      "annonceId": "annonce-015",
+      "signaleParId": "utilisateur-004",
+      "raison": "annonce_frauduleuse",
+      "description": "Le vendeur ne répond pas aux questions sur l'état réel du téléphone.",
+      "statut": "en_attente",
+      "dateCreation": "2026-08-28T10:00:00Z"
+    },
+    {
+      "id": "signalement-004",
+      "annonceId": "annonce-015",
+      "signaleParId": "utilisateur-006",
+      "raison": "arnaque_suspectee",
+      "description": "Photos identiques à une autre annonce déjà signalée ailleurs.",
+      "statut": "en_attente",
+      "dateCreation": "2026-08-29T09:00:00Z"
+    },
+    {
+      "id": "signalement-005",
+      "annonceId": "annonce-008",
+      "signaleParId": "utilisateur-003",
+      "raison": "contenu_inapproprie",
+      "description": "Titre trompeur par rapport au contenu de l'annonce.",
+      "statut": "traite",
+      "dateCreation": "2026-08-13T09:00:00Z"
+    },
+    {
+      "id": "signalement-006",
+      "annonceId": "annonce-013",
+      "signaleParId": "utilisateur-005",
+      "raison": "autre",
+      "description": "Signalement jugé infondé après vérification.",
+      "statut": "rejete",
+      "dateCreation": "2026-08-07T11:00:00Z"
     }
   ]
 }

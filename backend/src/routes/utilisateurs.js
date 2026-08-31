@@ -31,5 +31,28 @@ export default function utilisateursRoutes(db) {
   // Ajoute ici toute autre route custom liée aux utilisateurs
   // (ex: badge de vérification, historique des annonces vendues, etc.)
 
+  router.post("/", (req, res) => {
+    const { prenom, nom, telephone, whatsapp, email, avatar, bio } = req.body;
+    if (!prenom || !nom || !telephone) {
+      return res
+        .status(400)
+        .json({ error: "prenom, nom et telephone sont requis" });
+    }
+    const nouvelUtilisateur = {
+      id: `utilisateur-${Date.now()}`,
+      prenom,
+      nom,
+      telephone,
+      whatsapp: whatsapp || telephone,
+      email: email || null,
+      avatar: avatar || null,
+      bio: bio || "",
+      estVerifie: false,
+      dateCreation: new Date().toISOString(),
+    };
+    db.get("utilisateurs").push(nouvelUtilisateur).write();
+    res.status(201).json(nouvelUtilisateur);
+  });
+
   return router;
 }

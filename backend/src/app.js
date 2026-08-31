@@ -16,7 +16,7 @@ const app = express();
 
 // 1. Initialisation unique du routeur avec le bon chemin
 const router = jsonServer.router(path.join(__dirname, "..", "data", "db.json"));
-const jsonServerMiddlewares = jsonServer.defaults();
+const jsonServerMiddlewares = jsonServer.defaults({ bodyParser: true });
 
 // 2. Middlewares globaux (Suppression définitive de express.json())
 app.use(cors());

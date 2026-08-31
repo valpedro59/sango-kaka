@@ -5,7 +5,12 @@ import express from "express";
  * Le GET standard (/api/signalements) reste géré par json-server.
  * Le POST est custom car il applique aussi la logique de modération.
  *
- * Responsable : Ceti Louamba fait par Val Pedro
+ * Le parsing du body est géré GLOBALEMENT par jsonServerMiddlewares
+ * (jsonServer.defaults()) dans app.js — ne pas ajouter express.json()
+ * ici, ça relirait un flux déjà consommé et provoquerait à nouveau
+ * l'erreur "stream is not readable".
+ *
+ * Responsable : Ceti Louamba
  */
 
 // Seuil au-delà duquel une annonce est automatiquement marquée
@@ -15,8 +20,7 @@ const SEUIL_SIGNALEMENTS_AUTO = 3;
 export default function signalementsRoutes(db) {
   const router = express.Router();
 
-  // POST /api/signalements
-  router.post("/", express.json(), (req, res) => {
+  router.post("/", (req, res) => {
     const { annonceId, signaleParId, raison, description } = req.body;
 
     if (!annonceId || !raison) {

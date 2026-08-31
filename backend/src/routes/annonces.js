@@ -33,15 +33,19 @@ export default function annoncesRoutes(db) {
 
     // Récupération sécurisée du reste des champs si présents dans req.body
     const nouvelleAnnonce = {
-      id: Date.now(),
+      id: `annonce-${Date.now()}`,
       titre,
-      prix: Number(prix) || 0,
       description: req.body.description || "",
+      prix: Number(prix) || 0,
       categorieId: req.body.categorieId || null,
       quartierId: req.body.quartierId || null,
       vendeurId: req.body.vendeurId || null,
       image: imageUrl,
+      statut: "active",
+      estEnAvant: false,
+      vues: 0,
       dateCreation: new Date().toISOString(),
+      dateMaj: null,
     };
 
     // Sauvegarde directe dans Lowdb (json-server)
