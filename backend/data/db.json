@@ -160,6 +160,11 @@
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-001",
       "image": "https://picsum.photos/seed/annonce-001/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-001/600/400",
+        "https://picsum.photos/seed/annonce-001-2/600/400",
+        "https://picsum.photos/seed/annonce-001-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 3,
@@ -175,6 +180,11 @@
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-002",
       "image": "https://picsum.photos/seed/annonce-002/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-002/600/400",
+        "https://picsum.photos/seed/annonce-002-2/600/400",
+        "https://picsum.photos/seed/annonce-002-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 0,
@@ -190,6 +200,11 @@
       "quartierId": "quartier-003",
       "vendeurId": "utilisateur-004",
       "image": "https://picsum.photos/seed/annonce-003/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-003/600/400",
+        "https://picsum.photos/seed/annonce-003-2/600/400",
+        "https://picsum.photos/seed/annonce-003-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 12,
@@ -205,6 +220,11 @@
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-005",
       "image": "https://picsum.photos/seed/annonce-004/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-004/600/400",
+        "https://picsum.photos/seed/annonce-004-2/600/400",
+        "https://picsum.photos/seed/annonce-004-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": true,
       "vues": 27,
@@ -220,6 +240,11 @@
       "quartierId": "quartier-004",
       "vendeurId": "utilisateur-003",
       "image": "https://picsum.photos/seed/annonce-005/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-005/600/400",
+        "https://picsum.photos/seed/annonce-005-2/600/400",
+        "https://picsum.photos/seed/annonce-005-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 8,
@@ -235,6 +260,11 @@
       "quartierId": "quartier-005",
       "vendeurId": "utilisateur-006",
       "image": "https://picsum.photos/seed/annonce-006/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-006/600/400",
+        "https://picsum.photos/seed/annonce-006-2/600/400",
+        "https://picsum.photos/seed/annonce-006-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 5,
@@ -250,6 +280,11 @@
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-007",
       "image": "https://picsum.photos/seed/annonce-007/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-007/600/400",
+        "https://picsum.photos/seed/annonce-007-2/600/400",
+        "https://picsum.photos/seed/annonce-007-3/600/400"
+      ],
       "statut": "vendue",
       "estEnAvant": false,
       "vues": 34,
@@ -265,6 +300,11 @@
       "quartierId": "quartier-003",
       "vendeurId": "utilisateur-008",
       "image": "https://picsum.photos/seed/annonce-008/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-008/600/400",
+        "https://picsum.photos/seed/annonce-008-2/600/400",
+        "https://picsum.photos/seed/annonce-008-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 19,
@@ -280,6 +320,11 @@
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-002",
       "image": "https://picsum.photos/seed/annonce-009/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-009/600/400",
+        "https://picsum.photos/seed/annonce-009-2/600/400",
+        "https://picsum.photos/seed/annonce-009-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 6,
@@ -295,6 +340,11 @@
       "quartierId": "quartier-004",
       "vendeurId": "utilisateur-005",
       "image": "https://picsum.photos/seed/annonce-010/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-010/600/400",
+        "https://picsum.photos/seed/annonce-010-2/600/400",
+        "https://picsum.photos/seed/annonce-010-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 4,
@@ -310,6 +360,11 @@
       "quartierId": "quartier-005",
       "vendeurId": "utilisateur-006",
       "image": "https://picsum.photos/seed/annonce-011/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-011/600/400",
+        "https://picsum.photos/seed/annonce-011-2/600/400",
+        "https://picsum.photos/seed/annonce-011-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": true,
       "vues": 21,
@@ -325,6 +380,11 @@
       "quartierId": "quartier-002",
       "vendeurId": "utilisateur-004",
       "image": "https://picsum.photos/seed/annonce-012/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-012/600/400",
+        "https://picsum.photos/seed/annonce-012-2/600/400",
+        "https://picsum.photos/seed/annonce-012-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 9,
@@ -340,6 +400,11 @@
       "quartierId": "quartier-004",
       "vendeurId": "utilisateur-007",
       "image": "https://picsum.photos/seed/annonce-013/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-013/600/400",
+        "https://picsum.photos/seed/annonce-013-2/600/400",
+        "https://picsum.photos/seed/annonce-013-3/600/400"
+      ],
       "statut": "vendue",
       "estEnAvant": false,
       "vues": 15,
@@ -355,6 +420,11 @@
       "quartierId": "quartier-001",
       "vendeurId": "utilisateur-008",
       "image": "https://picsum.photos/seed/annonce-014/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-014/600/400",
+        "https://picsum.photos/seed/annonce-014-2/600/400",
+        "https://picsum.photos/seed/annonce-014-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 2,
@@ -370,6 +440,11 @@
       "quartierId": "quartier-003",
       "vendeurId": "utilisateur-003",
       "image": "https://picsum.photos/seed/annonce-015/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-015/600/400",
+        "https://picsum.photos/seed/annonce-015-2/600/400",
+        "https://picsum.photos/seed/annonce-015-3/600/400"
+      ],
       "statut": "signalee",
       "estEnAvant": false,
       "vues": 41,
@@ -385,6 +460,11 @@
       "quartierId": "quartier-005",
       "vendeurId": "utilisateur-002",
       "image": "https://picsum.photos/seed/annonce-016/600/400",
+      "images": [
+        "https://picsum.photos/seed/annonce-016/600/400",
+        "https://picsum.photos/seed/annonce-016-2/600/400",
+        "https://picsum.photos/seed/annonce-016-3/600/400"
+      ],
       "statut": "active",
       "estEnAvant": false,
       "vues": 3,
