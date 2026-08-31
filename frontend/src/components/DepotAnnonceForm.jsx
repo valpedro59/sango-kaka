@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 const MAX_PHOTOS = 6;
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
