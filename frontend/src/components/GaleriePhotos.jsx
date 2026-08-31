@@ -3,7 +3,7 @@ import SafeImage from "./SafeImage";
 
 export default function GaleriePhotos({ images, title }) {
   const [active, setActive] = useState(0);
-  const photos = images?.length ? images : [];
+  const photos = images?.length ? images : images ? [images] : [];
 
   if (photos.length === 0) {
     return (

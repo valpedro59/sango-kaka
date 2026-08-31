@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function CarteAnnonce({ annonce }) {
   const navigate = useNavigate();
+  const imageSrc = annonce.images?.[0] || annonce.image || null;
 
   return (
     <article
@@ -9,9 +10,9 @@ export default function CarteAnnonce({ annonce }) {
       className="group flex flex-col cursor-pointer overflow-hidden rounded-[14px] border border-neutral-200 bg-white shadow-sm shadow-neutral-200/60 transition duration-200 hover:-translate-y-1 hover:shadow-md"
     >
       <div className="relative h-40 overflow-hidden bg-neutral-200">
-        {annonce.images?.[0] ? (
+        {imageSrc ? (
           <img
-            src={annonce.images[0]}
+            src={imageSrc}
             alt={annonce.titre}
             loading="lazy"
             className="h-full w-full object-cover transition duration-300 group-hover:scale-105"

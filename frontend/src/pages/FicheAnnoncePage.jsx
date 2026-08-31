@@ -83,7 +83,7 @@ export default function FicheAnnoncePage() {
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <div className="space-y-6">
-          <GaleriePhotos images={listing.images} title={listing.titre} />
+          <GaleriePhotos images={listing.images || listing.image} title={listing.titre} />
 
           <div className="card p-5">
             <div className="flex flex-wrap items-center gap-2">
