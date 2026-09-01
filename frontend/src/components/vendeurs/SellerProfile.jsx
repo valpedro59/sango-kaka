@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import NoteEtoiles from "../NoteEtoiles";
-import ReviewCard from "./ReviewCard";
+import ListeAvis from "../ListeAvis";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
@@ -279,14 +279,7 @@ function SellerProfile() {
 
         {/* LISTE DES AVIS */}
         {avis.length > 0 ? (
-          <div className="grid gap-4 md:grid-cols-2">
-            {avis.map((avisItem) => (
-              <ReviewCard
-                key={avisItem.id}
-                avis={avisItem}
-              />
-            ))}
-          </div>
+          <ListeAvis reviews={avis} />
         ) : (
           <div className="rounded-2xl border border-[#E5E5E7] bg-white p-8 text-center">
             <p className="text-sm text-[#6E6E73]">

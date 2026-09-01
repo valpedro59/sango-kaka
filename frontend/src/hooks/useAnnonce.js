@@ -43,10 +43,7 @@ export default function useAnnonce(id) {
 
         if (reviewsData.length > 0) {
           const authorIds = [...new Set(reviewsData.map((r) => r.auteurId))];
-          const authorIdsQuery = authorIds.join(",");
-          const usersData = await fetch(
-            `${import.meta.env.VITE_API_URL || "http://localhost:3001/api"}/utilisateurs?id_in=${authorIdsQuery}`
-          ).then((res) => (res.ok ? res.json() : []));
+          const usersData = await UtilisateurAPI.getByIds(authorIds).catch(() => []);
 
           const usersMap = Object.fromEntries(usersData.map((u) => [u.id, u]));
           const enrichedReviews = reviewsData.map((r) => ({
