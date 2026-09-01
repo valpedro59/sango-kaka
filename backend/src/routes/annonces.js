@@ -28,8 +28,8 @@ export default function annoncesRoutes(db) {
 
     // CORRECTION : Utilisation de /images/ à la place de /uploads/
     const imageUrl = req.file
-      ? `http://localhost:3001/images/${req.file.filename}`
-      : `http://localhost:3001/images/default.jpg`;
+      ? `http://localhost:3000/images/${req.file.filename}`
+      : `http://localhost:3000/images/default.jpg`;
 
     // Récupération sécurisée du reste des champs si présents dans req.body
     const nouvelleAnnonce = {
