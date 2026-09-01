@@ -27,7 +27,12 @@ export default function Navigation() {
           >
             Explorer
           </button>
-          <button className="btn-secondary hidden sm:block">Connexion</button>
+          <button 
+            className="btn-secondary hidden sm:block"
+            onClick={()=>naviguer("/connexion")}
+          >
+              Connexion
+          </button>
           <button
             className="btn-primary"
             onClick={() => naviguer("/depot-annonce")}

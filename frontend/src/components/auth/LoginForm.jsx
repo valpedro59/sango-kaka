@@ -1,93 +1,109 @@
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function SignupForm() {
-  const [formData, setFormData] = useState({
-    prenom: "",
-    nom: "",
-    telephone: "",
-    email: "",
-  });
+const API_URL = "http://localhost:3000/api";
 
-  function handleChange(event) {
-    const { name, value } = event.target;
+function LoginForm() {
+  const navigate = useNavigate();
 
-    setFormData((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
-  }
+  const [telephone, setTelephone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    console.log("Données inscription :", formData);
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const numero = telephone.trim();
+
+      if (!numero) {
+        throw new Error(
+          "Veuillez saisir votre numéro de téléphone."
+        );
+      }
+
+      // Recherche de l'utilisateur
+      const response = await fetch(
+        `${API_URL}/utilisateurs?telephone=${encodeURIComponent(
+          numero
+        )}`
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "Impossible de vérifier le numéro de téléphone."
+        );
+      }
+
+      const utilisateurs = await response.json();
+
+      // Utilisateur inexistant
+      if (utilisateurs.length === 0) {
+        throw new Error(
+          "Aucun compte ne correspond à ce numéro de téléphone."
+        );
+      }
+
+      // Utilisateur trouvé
+      const utilisateur = utilisateurs[0];
+
+      console.log("Utilisateur connecté :", utilisateur);
+
+      setSuccess(`Bienvenue ${utilisateur.prenom} !`);
+
+      // Redirection vers Home
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    } catch (error) {
+      console.error("Erreur connexion :", error);
+
+      setError(
+        error.message ||
+          "Une erreur est survenue lors de la connexion."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <section className="w-full max-w-md rounded-3xl border border-[#E5E5E7] bg-white p-6 shadow-sm sm:p-8">
 
-      {/* EN-TÊTE */}
       <div className="mb-8 text-center">
         <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#0066CC]">
           Sango-Kaka
         </p>
 
         <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-[#1D1D1F]">
-          Créer un compte
+          Connexion
         </h1>
 
         <p className="mt-2 text-sm leading-6 text-[#6E6E73]">
-          Rejoignez Sango-Kaka pour publier et gérer vos annonces.
+          Connectez-vous avec votre numéro de téléphone.
         </p>
       </div>
 
-      {/* FORMULAIRE */}
-      <form onSubmit={handleSubmit} className="space-y-4">
-
-        {/* PRÉNOM */}
-        <div>
-          <label
-            htmlFor="prenom"
-            className="mb-2 block text-sm font-semibold text-[#1D1D1F]"
-          >
-            Prénom
-          </label>
-
-          <input
-            id="prenom"
-            name="prenom"
-            type="text"
-            value={formData.prenom}
-            onChange={handleChange}
-            placeholder="Votre prénom"
-            className="w-full rounded-xl border border-[#D2D2D7] px-4 py-3 text-sm outline-none transition focus:border-[#0066CC] focus:ring-2 focus:ring-[#0066CC]/10"
-            required
-          />
+      {error && (
+        <div className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+          {error}
         </div>
+      )}
 
-        {/* NOM */}
-        <div>
-          <label
-            htmlFor="nom"
-            className="mb-2 block text-sm font-semibold text-[#1D1D1F]"
-          >
-            Nom
-          </label>
-
-          <input
-            id="nom"
-            name="nom"
-            type="text"
-            value={formData.nom}
-            onChange={handleChange}
-            placeholder="Votre nom"
-            className="w-full rounded-xl border border-[#D2D2D7] px-4 py-3 text-sm outline-none transition focus:border-[#0066CC] focus:ring-2 focus:ring-[#0066CC]/10"
-            required
-          />
+      {success && (
+        <div className="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
+          {success}
         </div>
+      )}
 
-        {/* TÉLÉPHONE */}
+      <form onSubmit={handleSubmit} className="space-y-5">
+
         <div>
           <label
             htmlFor="telephone"
@@ -98,63 +114,45 @@ function SignupForm() {
 
           <input
             id="telephone"
-            name="telephone"
             type="tel"
-            value={formData.telephone}
-            onChange={handleChange}
+            value={telephone}
+            onChange={(event) => {
+              setTelephone(event.target.value);
+              setError("");
+              setSuccess("");
+            }}
             placeholder="+242 06 00 00 00"
-            className="w-full rounded-xl border border-[#D2D2D7] px-4 py-3 text-sm outline-none transition focus:border-[#0066CC] focus:ring-2 focus:ring-[#0066CC]/10"
+            autoComplete="tel"
+            disabled={loading}
             required
+            className="w-full rounded-xl border border-[#D2D2D7] px-4 py-3 text-sm outline-none transition focus:border-[#0066CC] focus:ring-2 focus:ring-[#0066CC]/10 disabled:bg-gray-100"
           />
         </div>
 
-        {/* EMAIL */}
-        <div>
-          <label
-            htmlFor="email"
-            className="mb-2 block text-sm font-semibold text-[#1D1D1F]"
-          >
-            Email
-            <span className="ml-1 font-normal text-[#6E6E73]">
-              (facultatif)
-            </span>
-          </label>
-
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="vous@example.com"
-            className="w-full rounded-xl border border-[#D2D2D7] px-4 py-3 text-sm outline-none transition focus:border-[#0066CC] focus:ring-2 focus:ring-[#0066CC]/10"
-          />
-        </div>
-
-        {/* BOUTON */}
         <button
           type="submit"
-          className="mt-2 w-full rounded-xl bg-[#0066CC] px-4 py-3 font-semibold text-white transition hover:bg-[#0052A3]"
+          disabled={loading}
+          className="w-full rounded-xl bg-[#0066CC] px-4 py-3 font-semibold text-white transition hover:bg-[#0052A3] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Créer mon compte
+          {loading ? "Vérification..." : "Se connecter"}
         </button>
       </form>
 
-      {/* CONNEXION */}
       <div className="mt-6 text-center">
         <p className="text-sm text-[#6E6E73]">
-          Vous avez déjà un compte ?
+          Vous n'avez pas encore de compte ?
         </p>
 
         <Link
-          to="/connexion"
+          to="/inscription"
           className="mt-1 inline-block text-sm font-semibold text-[#0066CC] hover:underline"
         >
-          Se connecter
+          Créer un compte
         </Link>
       </div>
     </section>
   );
 }
 
-export default SignupForm;
+export default LoginForm;
+
