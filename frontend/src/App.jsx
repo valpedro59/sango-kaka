@@ -1,25 +1,37 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+
+// Layout
+import MainLayout from "./layouts/MainLayout";
 
 // Pages
-import HomePage from "./components/HomePage";
-import SearchPage from "./components/SearchPage";
+import AccueilPage from "./pages/AccueilPage";
+import RecherchePage from "./pages/RecherchePage";
 import DepotAnnoncePage from "./pages/DepotAnnoncePage";
 import FicheAnnoncePage from "./pages/FicheAnnoncePage";
-
+import SellerProfile from "./components/SellerProfile";
+// Auth
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SingupPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Routes principales */}
-        <Route path="/" element={<SearchPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/depot-annonce" element={<DepotAnnoncePage />} />
-        <Route path="/annonce/:id" element={<FicheAnnoncePage />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<RecherchePage />} />
+          <Route path="/home" element={<AccueilPage />} />
+          <Route path="/depot-annonce" element={<DepotAnnoncePage />} />
+          <Route path="/annonce/:id" element={<FicheAnnoncePage />} />
+          <Route path="/categories/:slug" element={<RecherchePage />} />
+          <Route path="/vendeur/:id" element={<SellerProfile/>}/>
+        </Route>
 
-        {/* Route 404 - Page non trouvée */}
-        <Route path="*" element={<SearchPage />} />
+        {/* Authentification */}
+        <Route path="/connexion" element={<LoginPage />} />
+        <Route path="/inscription" element={<SignupPage />} />
+
+        {/* Route 404 */}
+        <Route path="*" element={<RecherchePage />} />
       </Routes>
     </BrowserRouter>
   );
