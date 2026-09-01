@@ -77,10 +77,6 @@ function LoginForm() {
     <section className="w-full max-w-md rounded-3xl border border-[#E5E5E7] bg-white p-6 shadow-sm sm:p-8">
 
       <div className="mb-8 text-center">
-        <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#0066CC]">
-          Sango-Kaka
-        </p>
-
         <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-[#1D1D1F]">
           Connexion
         </h1>
