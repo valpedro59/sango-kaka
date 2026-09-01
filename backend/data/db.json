@@ -95,6 +95,18 @@
       "bio": "Étudiante, je revends mes affaires en fin d'année",
       "estVerifie": true,
       "dateCreation": "2026-07-01T10:00:00Z"
+    },
+    {
+      "id": "utilisateur-1788275543326",
+      "prenom": "Louissel",
+      "nom": "KITSORO",
+      "telephone": "+242 068069454",
+      "whatsapp": "+242 068069454",
+      "email": "shekinahkitsoro@gmail.com",
+      "avatar": null,
+      "bio": "",
+      "estVerifie": false,
+      "dateCreation": "2026-09-01T15:12:23.326Z"
     }
   ],
   "categories": [
@@ -167,7 +179,7 @@
       ],
       "statut": "active",
       "estEnAvant": false,
-      "vues": 3,
+      "vues": 5,
       "dateCreation": "2026-08-10T10:30:00Z",
       "dateMaj": "2026-08-10T10:30:00Z"
     },
@@ -187,7 +199,7 @@
       ],
       "statut": "active",
       "estEnAvant": false,
-      "vues": 0,
+      "vues": 1,
       "dateCreation": "2026-08-09T14:20:00Z",
       "dateMaj": "2026-08-09T14:20:00Z"
     },
@@ -207,7 +219,7 @@
       ],
       "statut": "active",
       "estEnAvant": false,
-      "vues": 12,
+      "vues": 13,
       "dateCreation": "2026-08-15T09:00:00Z",
       "dateMaj": "2026-08-15T09:00:00Z"
     },

@@ -62,6 +62,7 @@ export default function AccueilPage() {
           </div>
         </section>
       </div>
+
     </main>
   );
 }
