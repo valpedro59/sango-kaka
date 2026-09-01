@@ -18,6 +18,8 @@ function App() {
         <Route path="/depot-annonce" element={<DepotAnnoncePage />} />
         <Route path="/annonce/:id" element={<FicheAnnoncePage />} />
 
+
+
         {/* Route 404 - Page non trouvée */}
         <Route path="*" element={<SearchPage />} />
       </Routes>
