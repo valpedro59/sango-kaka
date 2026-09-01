@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 export default function Navigation() {
-  const navigate = useNavigate();
+  const naviguer = useNavigate();
 
   return (
     <nav className="sticky top-0 z-50 border-b border-neutral-100 bg-white/80 backdrop-blur-lg">
@@ -17,12 +17,12 @@ export default function Navigation() {
         </Link>
 
         <div className="hidden flex-1 justify-center md:flex">
-          <SearchBar nav />
+          <SearchBar compacte />
         </div>
 
         <div className="flex flex-shrink-0 items-center gap-3">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => naviguer("/")}
             className="nav-link hidden sm:block"
           >
             Explorer
@@ -30,7 +30,7 @@ export default function Navigation() {
           <button className="btn-secondary hidden sm:block">Connexion</button>
           <button
             className="btn-primary"
-            onClick={() => navigate("/depot-annonce")}
+            onClick={() => naviguer("/depot-annonce")}
           >
             Deposer annonce
           </button>

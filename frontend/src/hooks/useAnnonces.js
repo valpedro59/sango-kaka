@@ -1,46 +1,48 @@
 import { useEffect, useState } from "react";
-import { AnnonceAPI, CategoryAPI, QuartierAPI } from "../services/api";
+import { AnnonceAPI, CategorieAPI, QuartierAPI } from "../services/api";
 
 export default function useAnnonces(filtres = {}) {
   const [annonces, setAnnonces] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [chargement, setChargement] = useState(true);
+  const [erreur, setErreur] = useState(null);
 
   useEffect(() => {
-    let cancelled = false;
+    let annule = false;
 
-    async function load() {
-      setLoading(true);
-      setError(null);
+    async function charger() {
+      setChargement(true);
+      setErreur(null);
       try {
-        const [annoncesData, categories, quartiers] = await Promise.all([
+        const [donneesAnnonces, categories, quartiers] = await Promise.all([
           AnnonceAPI.getAll(filtres),
-          CategoryAPI.getAll(),
+          CategorieAPI.getAll(),
           QuartierAPI.getAll(),
         ]);
 
-        if (cancelled) return;
+        if (annule) return;
 
-        const catMap = Object.fromEntries(categories.map((c) => [c.id, c.nom]));
-        const hoodMap = Object.fromEntries(quartiers.map((q) => [q.id, q.nom]));
+        const mapCategories = Object.fromEntries(categories.map((c) => [c.id, c.nom]));
+        const mapQuartiers = Object.fromEntries(quartiers.map((q) => [q.id, q.nom]));
 
-        const enriched = annoncesData.map((a) => ({
-          ...a,
-          categoryName: catMap[a.categorieId] || a.categorieId,
-          neighborhoodName: hoodMap[a.quartierId] || a.quartierId,
+        const annoncesEnrichies = donneesAnnonces.map((annonce) => ({
+          ...annonce,
+          nomCategorie: mapCategories[annonce.categorieId] || annonce.categorieId,
+          nomQuartier: mapQuartiers[annonce.quartierId] || annonce.quartierId,
         }));
 
-        setAnnonces(enriched);
+        setAnnonces(annoncesEnrichies);
       } catch (err) {
-        if (!cancelled) setError(err.message);
+        if (!annule) setErreur(err.message);
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!annule) setChargement(false);
       }
     }
 
-    load();
-    return () => { cancelled = true; };
+    charger();
+    return () => {
+      annule = true;
+    };
   }, [JSON.stringify(filtres)]);
 
-  return { annonces, loading, error };
+  return { annonces, chargement, erreur };
 }

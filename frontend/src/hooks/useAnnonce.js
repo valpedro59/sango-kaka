@@ -1,72 +1,74 @@
 import { useEffect, useState } from "react";
-import { AnnonceAPI, UtilisateurAPI, AvisAPI, CategoryAPI, QuartierAPI } from "../services/api";
+import { AnnonceAPI, UtilisateurAPI, AvisAPI, CategorieAPI, QuartierAPI } from "../services/api";
 
 export default function useAnnonce(id) {
-  const [listing, setListing] = useState(null);
-  const [seller, setSeller] = useState(null);
-  const [reviews, setReviews] = useState([]);
-  const [averageRating, setAverageRating] = useState(0);
+  const [annonce, setAnnonce] = useState(null);
+  const [vendeur, setVendeur] = useState(null);
+  const [avis, setAvis] = useState([]);
+  const [noteMoyenne, setNoteMoyenne] = useState(0);
   const [categories, setCategories] = useState([]);
   const [quartiers, setQuartiers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [chargement, setChargement] = useState(true);
+  const [erreur, setErreur] = useState(null);
 
   useEffect(() => {
     if (!id) return;
 
-    let cancelled = false;
+    let annule = false;
 
-    async function load() {
-      setLoading(true);
-      setError(null);
+    async function charger() {
+      setChargement(true);
+      setErreur(null);
       try {
-        const [annonceData, categoriesData, quartiersData] = await Promise.all([
+        const [donneesAnnonce, donneesCategories, donneesQuartiers] = await Promise.all([
           AnnonceAPI.getById(id),
-          CategoryAPI.getAll(),
+          CategorieAPI.getAll(),
           QuartierAPI.getAll(),
         ]);
 
-        if (cancelled) return;
-        setListing(annonceData);
-        setCategories(categoriesData);
-        setQuartiers(quartiersData);
+        if (annule) return;
+        setAnnonce(donneesAnnonce);
+        setCategories(donneesCategories);
+        setQuartiers(donneesQuartiers);
 
-        const [sellerData, reviewsData, ratingData] = await Promise.all([
-          UtilisateurAPI.getById(annonceData.vendeurId),
-          AvisAPI.getBySeller(annonceData.vendeurId),
-          UtilisateurAPI.getAverageRating(annonceData.vendeurId),
+        const [donneesVendeur, donneesAvis, donneesNote] = await Promise.all([
+          UtilisateurAPI.getById(donneesAnnonce.vendeurId),
+          AvisAPI.getParVendeur(donneesAnnonce.vendeurId),
+          UtilisateurAPI.getNoteMoyenne(donneesAnnonce.vendeurId),
         ]);
 
-        if (cancelled) return;
-        setSeller(sellerData);
-        setAverageRating(ratingData.note ?? 0);
+        if (annule) return;
+        setVendeur(donneesVendeur);
+        setNoteMoyenne(donneesNote.note ?? 0);
 
-        if (reviewsData.length > 0) {
-          const authorIds = [...new Set(reviewsData.map((r) => r.auteurId))];
-          const usersData = await UtilisateurAPI.getByIds(authorIds).catch(() => []);
+        if (donneesAvis.length > 0) {
+          const idsAuteurs = [...new Set(donneesAvis.map((a) => a.auteurId))];
+          const donneesUtilisateurs = await UtilisateurAPI.getByIds(idsAuteurs).catch(() => []);
 
-          const usersMap = Object.fromEntries(usersData.map((u) => [u.id, u]));
-          const enrichedReviews = reviewsData.map((r) => ({
-            ...r,
-            authorName: usersMap[r.auteurId]
-              ? `${usersMap[r.auteurId].prenom} ${usersMap[r.auteurId].nom}`
-              : r.auteurId,
+          const mapUtilisateurs = Object.fromEntries(donneesUtilisateurs.map((u) => [u.id, u]));
+          const avisEnrichis = donneesAvis.map((avisItem) => ({
+            ...avisItem,
+            nomAuteur: mapUtilisateurs[avisItem.auteurId]
+              ? `${mapUtilisateurs[avisItem.auteurId].prenom} ${mapUtilisateurs[avisItem.auteurId].nom}`
+              : avisItem.auteurId,
           }));
 
-          setReviews(enrichedReviews);
+          setAvis(avisEnrichis);
         } else {
-          setReviews([]);
+          setAvis([]);
         }
       } catch (err) {
-        if (!cancelled) setError(err.message);
+        if (!annule) setErreur(err.message);
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!annule) setChargement(false);
       }
     }
 
-    load();
-    return () => { cancelled = true; };
+    charger();
+    return () => {
+      annule = true;
+    };
   }, [id]);
 
-  return { listing, seller, reviews, averageRating, categories, quartiers, loading, error };
+  return { annonce, vendeur, avis, noteMoyenne, categories, quartiers, chargement, erreur };
 }

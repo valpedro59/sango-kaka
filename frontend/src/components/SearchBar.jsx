@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchBar({ nav }) {
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
+export default function SearchBar({ compacte }) {
+  const [requete, setRequete] = useState("");
+  const naviguer = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (query.trim()) {
-      navigate(`/?q=${encodeURIComponent(query.trim())}`);
+  function gererSoumission(evenement) {
+    evenement.preventDefault();
+    if (requete.trim()) {
+      naviguer(`/?q=${encodeURIComponent(requete.trim())}`);
     } else {
-      navigate("/");
+      naviguer("/");
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`relative w-full ${nav ? "max-w-md" : "max-w-xl"}`}>
+    <form
+      onSubmit={gererSoumission}
+      className={`relative w-full ${compacte ? "max-w-md" : "max-w-xl"}`}
+    >
       <svg
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -29,11 +32,11 @@ export default function SearchBar({ nav }) {
       </svg>
       <input
         type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        value={requete}
+        onChange={(e) => setRequete(e.target.value)}
         placeholder="Rechercher..."
         className={`w-full rounded-full border border-neutral-200 bg-neutral-50 text-sm text-neutral-900 shadow-sm outline-none transition placeholder:text-neutral-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 ${
-          nav ? "py-2 pl-9 pr-3" : "py-3 pl-11 pr-4"
+          compacte ? "py-2 pl-9 pr-3" : "py-3 pl-11 pr-4"
         }`}
       />
     </form>

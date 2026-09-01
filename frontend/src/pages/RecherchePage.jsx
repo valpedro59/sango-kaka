@@ -12,7 +12,7 @@ const tranches = [
   { label: "1M+", value: "1000000+" },
 ];
 
-const routeMap = {
+const mapRoutes = {
   Tous: "/",
   Telephones: "/categories/telephones",
   Moto: "/categories/moto",
@@ -21,31 +21,30 @@ const routeMap = {
   Autres: "/categories/autres",
 };
 
-const getCategoryFromPath = () => {
-  const currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
-  const found = Object.entries(routeMap).find(([, route]) => route === currentPath);
-  return found ? found[0] : "Tous";
+const obtenirCategorieDepuisChemin = () => {
+  const cheminActuel = window.location.pathname.replace(/\/+$/, "") || "/";
+  const trouvee = Object.entries(mapRoutes).find(([, route]) => route === cheminActuel);
+  return trouvee ? trouvee[0] : "Tous";
 };
 
 export default function RecherchePage() {
-  const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("q") || "";
-  const [selectedCategory, setSelectedCategory] = useState(() => getCategoryFromPath());
-  const [selectedBudget, setSelectedBudget] = useState("all");
-  const { annonces, loading, error } = useAnnonces({ statut: "active" });
+  const [parametresRecherche] = useSearchParams();
+  const requeteRecherche = parametresRecherche.get("q") || "";
+  const [categorieSelectionnee, setCategorieSelectionnee] = useState(() => obtenirCategorieDepuisChemin());
+  const [budgetSelectionne, setBudgetSelectionne] = useState("all");
+  const { annonces, chargement, erreur } = useAnnonces({ statut: "active" });
 
-  const filteredAnnonces = annonces.filter((a) => {
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
-      const match = a.titre?.toLowerCase().includes(q) || a.description?.toLowerCase().includes(q);
-      if (!match) return false;
+  const annoncesFiltrees = annonces.filter((annonce) => {
+    if (requeteRecherche) {
+      const mot = requeteRecherche.toLowerCase();
+      const correspond = annonce.titre?.toLowerCase().includes(mot) || annonce.description?.toLowerCase().includes(mot);
+      if (!correspond) return false;
     }
-    if (selectedBudget && selectedBudget !== "all") {
-      if (selectedBudget.endsWith("+")) {
-        const min = parseInt(selectedBudget);
-        if (a.prix < min) return false;
+    if (budgetSelectionne && budgetSelectionne !== "all") {
+      if (budgetSelectionne.endsWith("+")) {
+        const minimum = parseInt(budgetSelectionne);
+        if (annonce.prix < minimum) return false;
       } else {
-        const parts = selectedBudget.split("-");
         // simplified: using the value directly
       }
     }
@@ -53,17 +52,17 @@ export default function RecherchePage() {
   });
 
   useEffect(() => {
-    const nextRoute = routeMap[selectedCategory] || "/";
-    const currentPath = window.location.pathname.replace(/\/+$/, "") || "/";
-    if (currentPath !== nextRoute) {
-      window.history.pushState({}, "", nextRoute);
+    const prochaineRoute = mapRoutes[categorieSelectionnee] || "/";
+    const cheminActuel = window.location.pathname.replace(/\/+$/, "") || "/";
+    if (cheminActuel !== prochaineRoute) {
+      window.history.pushState({}, "", prochaineRoute);
     }
-  }, [selectedCategory]);
+  }, [categorieSelectionnee]);
 
   useEffect(() => {
-    const handleRouteChange = () => setSelectedCategory(getCategoryFromPath());
-    window.addEventListener("popstate", handleRouteChange);
-    return () => window.removeEventListener("popstate", handleRouteChange);
+    const gereChangementRoute = () => setCategorieSelectionnee(obtenirCategorieDepuisChemin());
+    window.addEventListener("popstate", gereChangementRoute);
+    return () => window.removeEventListener("popstate", gereChangementRoute);
   }, []);
 
   return (
@@ -84,20 +83,20 @@ export default function RecherchePage() {
                   Categorie
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {categoriesFiltres.map((category) => {
-                    const isSelected = selectedCategory === category;
+                  {categoriesFiltres.map((categorie) => {
+                    const estSelectionne = categorieSelectionnee === categorie;
                     return (
                       <button
-                        key={category}
+                        key={categorie}
                         type="button"
-                        onClick={() => setSelectedCategory(category)}
+                        onClick={() => setCategorieSelectionnee(categorie)}
                         className={`chip transition ${
-                          isSelected
+                          estSelectionne
                             ? "border-brand-100 bg-brand-50 text-brand-500 shadow-sm"
                             : "border-neutral-200 bg-neutral-50 text-neutral-500 hover:border-brand-100 hover:bg-brand-50 hover:text-brand-500"
                         }`}
                       >
-                        {category}
+                        {categorie}
                       </button>
                     );
                   })}
@@ -110,14 +109,14 @@ export default function RecherchePage() {
                 </p>
                 <div className="space-y-2">
                   {tranches.map((tranche) => {
-                    const isSelected = selectedBudget === tranche.value;
+                    const estSelectionne = budgetSelectionne === tranche.value;
                     return (
                       <button
                         key={tranche.label}
                         type="button"
-                        onClick={() => setSelectedBudget(tranche.value)}
+                        onClick={() => setBudgetSelectionne(tranche.value)}
                         className={`flex w-full items-center justify-between rounded-[12px] border px-3 py-2 text-left text-sm transition ${
-                          isSelected
+                          estSelectionne
                             ? "border-brand-100 bg-brand-50 text-brand-500 shadow-sm"
                             : "border-neutral-200 bg-neutral-50 text-neutral-600 hover:border-brand-100 hover:bg-brand-50 hover:text-brand-500"
                         }`}
@@ -137,28 +136,28 @@ export default function RecherchePage() {
           <section>
             <div className="mb-5">
               <p className="font-tag text-[11px] font-bold uppercase tracking-[0.2em] text-brand-500">
-                {searchQuery ? `Resultats pour "${searchQuery}"` : "Annonces"}
+                {requeteRecherche ? `Resultats pour "${requeteRecherche}"` : "Annonces"}
               </p>
               <h2 className="mt-1 text-3xl font-extrabold text-neutral-900">
-                {searchQuery ? "Recherche" : "Annonces populaires"}
+                {requeteRecherche ? "Recherche" : "Annonces populaires"}
               </h2>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {loading && Array.from({ length: 8 }).map((_, i) => (
+              {chargement && Array.from({ length: 8 }).map((_, i) => (
                 <SkeletonCard key={i} />
               ))}
-              {error && (
+              {erreur && (
                 <p className="col-span-full py-12 text-center text-sm text-red-500">
-                  {error}
+                  {erreur}
                 </p>
               )}
-              {!loading && !error && filteredAnnonces.length === 0 && (
+              {!chargement && !erreur && annoncesFiltrees.length === 0 && (
                 <p className="col-span-full py-12 text-center text-sm text-neutral-500">
                   Aucune annonce pour le moment.
                 </p>
               )}
-              {!loading && !error && filteredAnnonces.map((annonce) => (
+              {!chargement && !erreur && annoncesFiltrees.map((annonce) => (
                 <CarteAnnonce key={annonce.id} annonce={annonce} />
               ))}
             </div>

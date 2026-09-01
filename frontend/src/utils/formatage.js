@@ -1,21 +1,21 @@
-export function formatDate(iso) {
-  if (!iso) return "";
-  return new Date(iso).toLocaleDateString("fr-FR", {
+export function formaterDate(dateIso) {
+  if (!dateIso) return "";
+  return new Date(dateIso).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 }
 
-export function formatMemberSince(iso) {
-  if (!iso) return "";
-  return new Date(iso).toLocaleDateString("fr-FR", {
+export function formaterMembreDepuis(dateIso) {
+  if (!dateIso) return "";
+  return new Date(dateIso).toLocaleDateString("fr-FR", {
     month: "long",
     year: "numeric",
   });
 }
 
-export function formatPrix(montant) {
+export function formaterPrix(montant) {
   if (montant == null) return "";
   return `${montant.toLocaleString("fr-FR")} FCFA`;
 }

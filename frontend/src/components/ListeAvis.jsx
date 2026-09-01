@@ -2,34 +2,34 @@ import { useEffect, useState } from "react";
 import { UtilisateurAPI } from "../services/api";
 import NoteEtoiles from "./NoteEtoiles";
 
-export default function ListeAvis({ reviews = [] }) {
+export default function ListeAvis({ avis = [] }) {
   const [auteurs, setAuteurs] = useState({});
 
   const auteursManquants = [
     ...new Set(
-      reviews
-        .filter((avis) => !avis.authorName && avis.auteurId)
-        .map((avis) => avis.auteurId)
+      avis
+        .filter((avisItem) => !avisItem.nomAuteur && avisItem.auteurId)
+        .map((avisItem) => avisItem.auteurId)
     ),
   ];
 
   useEffect(() => {
     if (auteursManquants.length === 0) return;
-    let cancelled = false;
+    let annule = false;
 
     UtilisateurAPI.getByIds(auteursManquants)
       .then((liste) => {
-        if (cancelled) return;
-        setAuteurs(Object.fromEntries(liste.map((u) => [u.id, u])));
+        if (annule) return;
+        setAuteurs(Object.fromEntries(liste.map((utilisateur) => [utilisateur.id, utilisateur])));
       })
       .catch(() => {});
 
     return () => {
-      cancelled = true;
+      annule = true;
     };
   }, [auteursManquants.join(",")]);
 
-  if (!Array.isArray(reviews) || reviews.length === 0) return null;
+  if (!Array.isArray(avis) || avis.length === 0) return null;
 
   return (
     <div className="card p-5">
@@ -37,19 +37,19 @@ export default function ListeAvis({ reviews = [] }) {
         Avis clients
       </h3>
       <div className="space-y-4">
-        {reviews.map((avis) => {
-          const auteur = auteurs[avis.auteurId];
+        {avis.map((avisItem) => {
+          const auteur = auteurs[avisItem.auteurId];
           const nomAuteur =
-            avis.authorName ||
+            avisItem.nomAuteur ||
             (auteur ? `${auteur.prenom} ${auteur.nom}` : "Client");
           const initiale =
             auteur?.prenom?.charAt(0).toUpperCase() ||
-            avis.authorName?.charAt(0).toUpperCase() ||
+            avisItem.nomAuteur?.charAt(0).toUpperCase() ||
             "?";
 
           return (
             <div
-              key={avis.id}
+              key={avisItem.id}
               className="border-b border-neutral-100 pb-3 last:border-0 last:pb-0"
             >
               <div className="flex items-center justify-between gap-3">
@@ -61,10 +61,10 @@ export default function ListeAvis({ reviews = [] }) {
                     {nomAuteur}
                   </p>
                 </div>
-                <NoteEtoiles note={avis.note} />
+                <NoteEtoiles note={avisItem.note} />
               </div>
               <p className="mt-1 text-sm leading-relaxed text-neutral-500">
-                {avis.commentaire}
+                {avisItem.commentaire}
               </p>
             </div>
           );

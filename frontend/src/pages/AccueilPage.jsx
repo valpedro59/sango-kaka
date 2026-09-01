@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 export default function AccueilPage() {
-  const navigate = useNavigate();
+  const naviguer = useNavigate();
 
   return (
     <main className="min-h-screen bg-grid-soft py-12">
@@ -9,25 +9,25 @@ export default function AccueilPage() {
         <section className="card overflow-hidden p-8 sm:p-10">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <span className="badge">Verifie</span>
+              <span className="badge">Vérifié</span>
               <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">
                 Sango&middot;Kaka
               </h1>
               <p className="mt-3 max-w-xl text-base text-neutral-500 sm:text-lg">
-                Trouvez des biens d'occasion fiables, verifies et bien presentes.
+                Trouvez des biens d'occasion fiables, vérifiés et bien présentés.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
               <button
                 className="btn-secondary"
-                onClick={() => navigate("/")}
+                onClick={() => naviguer("/")}
               >
                 Explorer
               </button>
               <button
                 className="btn-primary"
-                onClick={() => navigate("/depot-annonce")}
+                onClick={() => naviguer("/depot-annonce")}
               >
                 Publier une annonce
               </button>
@@ -44,20 +44,20 @@ export default function AccueilPage() {
             </div>
 
             <div className="rounded-[14px] border border-neutral-200 bg-neutral-50 p-4">
-              <span className="text-sm font-medium text-neutral-500">Vendeurs verifies</span>
+              <span className="text-sm font-medium text-neutral-500">Vendeurs vérifiés</span>
               <p className="mt-3 text-3xl font-extrabold text-neutral-900">340</p>
             </div>
 
             <div className="rounded-[14px] border border-neutral-200 bg-neutral-50 p-4">
-              <span className="text-sm font-medium text-neutral-500">Reponses rapides</span>
+              <span className="text-sm font-medium text-neutral-500">Réponses rapides</span>
               <p className="mt-3 text-3xl font-extrabold text-neutral-900">92%</p>
             </div>
           </div>
 
           <div className="mt-8 flex items-center gap-4">
-            <span className="verification-stamp" aria-label="Annonce verifiee" />
+            <span className="verification-stamp" aria-label="Annonce vérifiée" />
             <span className="font-tag text-sm tracking-wide text-brand-500 uppercase">
-              Tampon de verification
+              Tampon de vérification
             </span>
           </div>
         </section>
