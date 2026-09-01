@@ -8,6 +8,7 @@ import AccueilPage from "./pages/AccueilPage";
 import RecherchePage from "./pages/RecherchePage";
 import DepotAnnoncePage from "./pages/DepotAnnoncePage";
 import FicheAnnoncePage from "./pages/FicheAnnoncePage";
+import SellerProfile from "./components/SellerProfile";
 // Auth
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SingupPage";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/depot-annonce" element={<DepotAnnoncePage />} />
           <Route path="/annonce/:id" element={<FicheAnnoncePage />} />
           <Route path="/categories/:slug" element={<RecherchePage />} />
+          <Route path="/vendeur/:id" element={<SellerProfile/>}/>
         </Route>
 
         {/* Authentification */}
