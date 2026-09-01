@@ -9,4 +9,4 @@ import SellerProfile from "../components/vendeurs/SellerProfile";
     
  }
 
- export default SellerProfilePage;
+export default SellerProfilePage;

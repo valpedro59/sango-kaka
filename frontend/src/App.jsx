@@ -4,8 +4,11 @@ import "./App.css";
 // Pages
 import HomePage from "./components/HomePage";
 import SearchPage from "./components/SearchPage";
+import SellerProfilePage from "./pages/SellerProfilePage";
 import DepotAnnoncePage from "./pages/DepotAnnoncePage";
 import FicheAnnoncePage from "./pages/FicheAnnoncePage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SingupPage";
 
 
 function App() {
@@ -17,6 +20,12 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/depot-annonce" element={<DepotAnnoncePage />} />
         <Route path="/annonce/:id" element={<FicheAnnoncePage />} />
+        <Route path="/seller-profile" element={<SellerProfilePage />} />
+
+
+        <Route path="/connexion" element={<LoginPage />} />
+        <Route path="/inscription" element={<SignupPage />} />
+
 
 
 
