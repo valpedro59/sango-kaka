@@ -1,4 +1,8 @@
-function HomePage() {
+import { useNavigate } from "react-router-dom";
+
+export default function AccueilPage() {
+  const naviguer = useNavigate();
+
   return (
     <main className="min-h-screen bg-grid-soft py-12">
       <div className="container-shell">
@@ -7,17 +11,26 @@ function HomePage() {
             <div>
               <span className="badge">Vérifié</span>
               <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">
-                Sango·Kaka
+                Sango&middot;Kaka
               </h1>
               <p className="mt-3 max-w-xl text-base text-neutral-500 sm:text-lg">
-                Trouvez des biens d’occasion fiables, vérifiés et bien présentés.
+                Trouvez des biens d'occasion fiables, vérifiés et bien présentés.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-3">
-              <button className="btn-secondary">Explorer</button>
-              <button className="btn-primary">Publier une annonce</button>
-              <button className="btn-whatsapp">Contacter sur WhatsApp</button>
+              <button
+                className="btn-secondary"
+                onClick={() => naviguer("/")}
+              >
+                Explorer
+              </button>
+              <button
+                className="btn-primary"
+                onClick={() => naviguer("/depot-annonce")}
+              >
+                Publier une annonce
+              </button>
             </div>
           </div>
 
@@ -52,5 +65,3 @@ function HomePage() {
     </main>
   );
 }
-
-export default HomePage;

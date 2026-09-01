@@ -1,9 +1,9 @@
-export function buildWhatsAppLink(phoneNumber, message) {
-  if (!phoneNumber) return null;
-  const cleaned = phoneNumber.replace(/\D/g, "");
-  const base = `https://wa.me/${cleaned}`;
+export function construireLienWhatsApp(numeroTelephone, message) {
+  if (!numeroTelephone) return null;
+  const numeroNettoye = String(numeroTelephone).replace(/\D/g, "");
+  const lien = `https://wa.me/${numeroNettoye}`;
   if (message) {
-    return `${base}?text=${encodeURIComponent(message)}`;
+    return `${lien}?text=${encodeURIComponent(message)}`;
   }
-  return base;
+  return lien;
 }

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
+import { AnnonceAPI, CategorieAPI, QuartierAPI } from "../services/api";
 
-const API_URL = "http://localhost:3000/api";
-
-const MAX_PHOTOS = 6;
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+const NOMBRE_MAX_PHOTOS = 6;
+const TAILLE_MAX_FICHIER = 5 * 1024 * 1024; // 5 MB
 
 function DepotAnnonceForm() {
-  const [formData, setFormData] = useState({
+  const [donneesFormulaire, setDonneesFormulaire] = useState({
     titre: "",
     categorieId: "",
     prix: "",
@@ -18,64 +17,49 @@ function DepotAnnonceForm() {
   const [categories, setCategories] = useState([]);
   const [quartiers, setQuartiers] = useState([]);
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [loadingData, setLoadingData] = useState(true);
+  const [erreur, setErreur] = useState("");
+  const [succes, setSucces] = useState("");
+  const [chargement, setChargement] = useState(false);
+  const [chargementDonnees, setChargementDonnees] = useState(true);
 
   // --------------------------------------------------
   // RÉCUPÉRATION DES CATÉGORIES ET QUARTIERS
   // --------------------------------------------------
 
   useEffect(() => {
-    async function fetchFormData() {
+    async function chargerDonneesFormulaire() {
       try {
-        setLoadingData(true);
-        setError("");
+        setChargementDonnees(true);
+        setErreur("");
 
-        const [categoriesResponse, quartiersResponse] =
-          await Promise.all([
-            fetch(`${API_URL}/categories`),
-            fetch(`${API_URL}/quartiers`),
-          ]);
+        const [donneesCategories, donneesQuartiers] = await Promise.all([
+          CategorieAPI.getAll(),
+          QuartierAPI.getAll(),
+        ]);
 
-        if (!categoriesResponse.ok || !quartiersResponse.ok) {
-          throw new Error(
-            "Impossible de récupérer les catégories et les quartiers."
-          );
-        }
-
-        const categoriesData = await categoriesResponse.json();
-        const quartiersData = await quartiersResponse.json();
-
-        console.log("CATEGORIES :", categoriesData);
-        console.log("QUARTIERS :", quartiersData);
-
-        setCategories(categoriesData);
-        setQuartiers(quartiersData);
-      } catch (error) {
-        console.error("Erreur récupération données :", error);
-
-        setError(
+        setCategories(donneesCategories);
+        setQuartiers(donneesQuartiers);
+      } catch {
+        setErreur(
           "Impossible de charger les catégories et les quartiers. Vérifiez que le backend est lancé."
         );
       } finally {
-        setLoadingData(false);
+        setChargementDonnees(false);
       }
     }
 
-    fetchFormData();
+    chargerDonneesFormulaire();
   }, []);
 
   // --------------------------------------------------
   // CHANGEMENT DES CHAMPS
   // --------------------------------------------------
 
-  function handleChange(event) {
-    const { name, value } = event.target;
+  function gererChangement(evenement) {
+    const { name, value } = evenement.target;
 
-    setFormData((previousData) => ({
-      ...previousData,
+    setDonneesFormulaire((donneesPrecedentes) => ({
+      ...donneesPrecedentes,
       [name]: value,
     }));
   }
@@ -84,182 +68,163 @@ function DepotAnnonceForm() {
   // AJOUT DES PHOTOS
   // --------------------------------------------------
 
-  function handlePhotoChange(event) {
-    const selectedFiles = Array.from(event.target.files);
+  function gererChangementPhotos(evenement) {
+    const fichiersSelectionnes = Array.from(evenement.target.files);
 
-    if (selectedFiles.length === 0) {
+    if (fichiersSelectionnes.length === 0) {
       return;
     }
 
-    setError("");
-    setSuccess("");
+    setErreur("");
+    setSucces("");
 
     // Vérifier le nombre maximum de photos
-    if (formData.photos.length + selectedFiles.length > MAX_PHOTOS) {
-      setError(
-        `Vous pouvez ajouter au maximum ${MAX_PHOTOS} photos par annonce.`
+    if (donneesFormulaire.photos.length + fichiersSelectionnes.length > NOMBRE_MAX_PHOTOS) {
+      setErreur(
+        `Vous pouvez ajouter au maximum ${NOMBRE_MAX_PHOTOS} photos par annonce.`
       );
 
-      event.target.value = "";
+      evenement.target.value = "";
       return;
     }
 
-    const validPhotos = [];
+    const photosValides = [];
 
-    for (const file of selectedFiles) {
+    for (const fichier of fichiersSelectionnes) {
       // Vérification du type
-      if (!file.type.startsWith("image/")) {
-        setError(
-          `Le fichier "${file.name}" n'est pas une image valide.`
+      if (!fichier.type.startsWith("image/")) {
+        setErreur(
+          `Le fichier "${fichier.name}" n'est pas une image valide.`
         );
         continue;
       }
 
       // Vérification de la taille
-      if (file.size > MAX_FILE_SIZE) {
-        setError(
-          `La photo "${file.name}" dépasse la taille maximale de 5 MB.`
+      if (fichier.size > TAILLE_MAX_FICHIER) {
+        setErreur(
+          `La photo "${fichier.name}" dépasse la taille maximale de 5 MB.`
         );
         continue;
       }
 
-      validPhotos.push(file);
+      photosValides.push(fichier);
     }
 
-    if (validPhotos.length > 0) {
-      setFormData((previousData) => ({
-        ...previousData,
-        photos: [...previousData.photos, ...validPhotos],
+    if (photosValides.length > 0) {
+      setDonneesFormulaire((donneesPrecedentes) => ({
+        ...donneesPrecedentes,
+        photos: [...donneesPrecedentes.photos, ...photosValides],
       }));
     }
 
     // Permet de sélectionner à nouveau le même fichier
-    event.target.value = "";
+    evenement.target.value = "";
   }
 
   // --------------------------------------------------
   // SUPPRESSION D'UNE PHOTO
   // --------------------------------------------------
 
-  function handleRemovePhoto(indexToRemove) {
-    setFormData((previousData) => ({
-      ...previousData,
-      photos: previousData.photos.filter(
-        (_, index) => index !== indexToRemove
+  function gererSuppressionPhoto(indexASupprimer) {
+    setDonneesFormulaire((donneesPrecedentes) => ({
+      ...donneesPrecedentes,
+      photos: donneesPrecedentes.photos.filter(
+        (_, index) => index !== indexASupprimer
       ),
     }));
 
-    setError("");
+    setErreur("");
   }
 
   // --------------------------------------------------
   // PRÉVISUALISATION D'UNE PHOTO
   // --------------------------------------------------
 
-  function getPhotoPreview(file) {
-    return URL.createObjectURL(file);
+  function obtenirApercuPhoto(fichier) {
+    return URL.createObjectURL(fichier);
   }
 
   // --------------------------------------------------
   // SOUMISSION DU FORMULAIRE
   // --------------------------------------------------
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  async function gererSoumission(evenement) {
+    evenement.preventDefault();
 
-    setError("");
-    setSuccess("");
+    setErreur("");
+    setSucces("");
 
     // -----------------------------
     // VALIDATION
     // -----------------------------
 
-    if (!formData.titre.trim()) {
-      setError("Veuillez renseigner le titre de l'annonce.");
+    if (!donneesFormulaire.titre.trim()) {
+      setErreur("Veuillez renseigner le titre de l'annonce.");
       return;
     }
 
-    if (!formData.categorieId) {
-      setError("Veuillez sélectionner une catégorie.");
+    if (!donneesFormulaire.categorieId) {
+      setErreur("Veuillez sélectionner une catégorie.");
       return;
     }
 
-    if (!formData.prix || Number(formData.prix) <= 0) {
-      setError("Veuillez renseigner un prix valide.");
+    if (!donneesFormulaire.prix || Number(donneesFormulaire.prix) <= 0) {
+      setErreur("Veuillez renseigner un prix valide.");
       return;
     }
 
-    if (!formData.quartierId) {
-      setError("Veuillez sélectionner un quartier.");
+    if (!donneesFormulaire.quartierId) {
+      setErreur("Veuillez sélectionner un quartier.");
       return;
     }
 
-    if (!formData.description.trim()) {
-      setError("Veuillez renseigner une description.");
+    if (!donneesFormulaire.description.trim()) {
+      setErreur("Veuillez renseigner une description.");
       return;
     }
 
     try {
-      setLoading(true);
+      setChargement(true);
 
       // --------------------------------------------------
       // FORM DATA POUR ENVOYER LES FICHIERS
       // --------------------------------------------------
 
-      const data = new FormData();
+      const donnees = new FormData();
 
-      data.append("titre", formData.titre.trim());
-      data.append("description", formData.description.trim());
-      data.append("prix", Number(formData.prix));
-      data.append("categorieId", formData.categorieId);
-      data.append("quartierId", formData.quartierId);
-      data.append("vendeurId", "utilisateur-001");
-      data.append("statut", "active");
-      data.append("estEnAvant", "false");
-      data.append("vues", "0");
+      donnees.append("titre", donneesFormulaire.titre.trim());
+      donnees.append("description", donneesFormulaire.description.trim());
+      donnees.append("prix", Number(donneesFormulaire.prix));
+      donnees.append("categorieId", donneesFormulaire.categorieId);
+      donnees.append("quartierId", donneesFormulaire.quartierId);
+      donnees.append("vendeurId", "utilisateur-001");
+      donnees.append("statut", "active");
+      donnees.append("estEnAvant", "false");
+      donnees.append("vues", "0");
 
       const date = new Date().toISOString();
 
-      data.append("dateCreation", date);
-      data.append("dateMaj", date);
+      donnees.append("dateCreation", date);
+      donnees.append("dateMaj", date);
 
       // Ajouter les photos
-      formData.photos.forEach((photo) => {
-        data.append("photos", photo);
+      donneesFormulaire.photos.forEach((photo) => {
+        donnees.append("photos", photo);
       });
-
-      console.log("Nombre de photos :", formData.photos.length);
 
       // --------------------------------------------------
       // ENVOI AU BACKEND
       // --------------------------------------------------
 
-      const response = await fetch(`${API_URL}/annonces`, {
-        method: "POST",
-        body: data,
-      });
+      await AnnonceAPI.creer(donnees);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-
-        console.error("Erreur backend :", errorText);
-
-        throw new Error(
-          `Erreur HTTP ${response.status}: impossible de publier l'annonce.`
-        );
-      }
-
-      const nouvelleAnnonce = await response.json();
-
-      console.log("Annonce créée :", nouvelleAnnonce);
-
-      setSuccess("Votre annonce a été publiée avec succès !");
+      setSucces("Votre annonce a été publiée avec succès !");
 
       // --------------------------------------------------
       // RESET
       // --------------------------------------------------
 
-      setFormData({
+      setDonneesFormulaire({
         titre: "",
         categorieId: "",
         prix: "",
@@ -267,14 +232,12 @@ function DepotAnnonceForm() {
         description: "",
         photos: [],
       });
-    } catch (error) {
-      console.error("Erreur publication annonce :", error);
-
-      setError(
+    } catch {
+      setErreur(
         "Une erreur est survenue lors de la publication. Vérifiez que le serveur backend est bien lancé."
       );
     } finally {
-      setLoading(false);
+      setChargement(false);
     }
   }
 
@@ -285,7 +248,7 @@ function DepotAnnonceForm() {
   return (
     <div className="min-h-screen bg-white">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={gererSoumission}
         className="mx-auto flex w-full max-w-6xl flex-col px-4 py-6 sm:px-6 lg:h-screen lg:overflow-hidden lg:px-8 lg:py-4"
       >
         {/* HEADER */}
@@ -327,8 +290,8 @@ function DepotAnnonceForm() {
                   name="titre"
                   type="text"
                   placeholder="Ex : Moto Yamaha 125cc"
-                  value={formData.titre}
-                  onChange={handleChange}
+                  value={donneesFormulaire.titre}
+                  onChange={gererChangement}
                   className="h-11 w-full rounded-[9px] border border-[#D2D2D7] bg-white px-3 text-sm text-[#1D1D1F] outline-none placeholder:text-[#9A9AA0] focus:border-[#0066CC] focus:ring-4 focus:ring-[#0066CC]/10"
                 />
               </div>
@@ -345,20 +308,20 @@ function DepotAnnonceForm() {
                 <select
                   id="categorieId"
                   name="categorieId"
-                  value={formData.categorieId}
-                  onChange={handleChange}
-                  disabled={loadingData}
+                  value={donneesFormulaire.categorieId}
+                  onChange={gererChangement}
+                  disabled={chargementDonnees}
                   className="h-11 w-full rounded-[9px] border border-[#D2D2D7] bg-white px-3 text-sm text-[#1D1D1F] outline-none focus:border-[#0066CC] focus:ring-4 focus:ring-[#0066CC]/10 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <option value="">
-                    {loadingData
+                    {chargementDonnees
                       ? "Chargement..."
                       : "Sélectionner une catégorie"}
                   </option>
 
-                  {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.nom}
+                  {categories.map((categorie) => (
+                    <option key={categorie.id} value={categorie.id}>
+                      {categorie.nom}
                     </option>
                   ))}
                 </select>
@@ -380,8 +343,8 @@ function DepotAnnonceForm() {
                     type="number"
                     min="0"
                     placeholder="450000"
-                    value={formData.prix}
-                    onChange={handleChange}
+                    value={donneesFormulaire.prix}
+                    onChange={gererChangement}
                     className="h-11 w-full rounded-[9px] border border-[#D2D2D7] bg-white px-3 pr-16 text-sm text-[#1D1D1F] outline-none placeholder:text-[#9A9AA0] focus:border-[#0066CC] focus:ring-4 focus:ring-[#0066CC]/10"
                   />
 
@@ -403,13 +366,13 @@ function DepotAnnonceForm() {
                 <select
                   id="quartierId"
                   name="quartierId"
-                  value={formData.quartierId}
-                  onChange={handleChange}
-                  disabled={loadingData}
+                  value={donneesFormulaire.quartierId}
+                  onChange={gererChangement}
+                  disabled={chargementDonnees}
                   className="h-11 w-full rounded-[9px] border border-[#D2D2D7] bg-white px-3 text-sm text-[#1D1D1F] outline-none focus:border-[#0066CC] focus:ring-4 focus:ring-[#0066CC]/10 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <option value="">
-                    {loadingData
+                    {chargementDonnees
                       ? "Chargement..."
                       : "Sélectionner un quartier"}
                   </option>
@@ -436,8 +399,8 @@ function DepotAnnonceForm() {
                   name="description"
                   rows="4"
                   placeholder="Décrivez votre article : état, caractéristiques, informations importantes..."
-                  value={formData.description}
-                  onChange={handleChange}
+                  value={donneesFormulaire.description}
+                  onChange={gererChangement}
                   className="w-full resize-none rounded-[9px] border border-[#D2D2D7] bg-white p-3 text-sm leading-relaxed text-[#1D1D1F] outline-none placeholder:text-[#9A9AA0] focus:border-[#0066CC] focus:ring-4 focus:ring-[#0066CC]/10"
                 />
               </div>
@@ -452,7 +415,7 @@ function DepotAnnonceForm() {
               </h2>
 
               <p className="mt-1 text-sm text-[#6E6E73]">
-                Ajoutez jusqu'à {MAX_PHOTOS} photos pour présenter votre
+                Ajoutez jusqu'à {NOMBRE_MAX_PHOTOS} photos pour présenter votre
                 article.
               </p>
             </div>
@@ -463,7 +426,7 @@ function DepotAnnonceForm() {
               type="file"
               accept="image/jpeg,image/png,image/webp"
               multiple
-              onChange={handlePhotoChange}
+              onChange={gererChangementPhotos}
               className="hidden"
             />
 
@@ -486,29 +449,29 @@ function DepotAnnonceForm() {
             </label>
 
             {/* APERÇUS */}
-            {formData.photos.length > 0 && (
+            {donneesFormulaire.photos.length > 0 && (
               <div className="mt-4">
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-xs font-semibold text-[#1D1D1F]">
-                    {formData.photos.length} photo
-                    {formData.photos.length > 1 ? "s" : ""} sélectionnée
-                    {formData.photos.length > 1 ? "s" : ""}
+                    {donneesFormulaire.photos.length} photo
+                    {donneesFormulaire.photos.length > 1 ? "s" : ""} sélectionnée
+                    {donneesFormulaire.photos.length > 1 ? "s" : ""}
                   </span>
 
                   <span className="text-xs text-[#9A9AA0]">
-                    {MAX_PHOTOS - formData.photos.length} restante
-                    {MAX_PHOTOS - formData.photos.length > 1 ? "s" : ""}
+                    {NOMBRE_MAX_PHOTOS - donneesFormulaire.photos.length} restante
+                    {NOMBRE_MAX_PHOTOS - donneesFormulaire.photos.length > 1 ? "s" : ""}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {formData.photos.map((photo, index) => (
+                  {donneesFormulaire.photos.map((photo, index) => (
                     <div
                       key={`${photo.name}-${index}`}
                       className="group relative overflow-hidden rounded-lg border border-[#D2D2D7] bg-white"
                     >
                       <img
-                        src={getPhotoPreview(photo)}
+                        src={obtenirApercuPhoto(photo)}
                         alt={`Aperçu ${index + 1}`}
                         className="h-24 w-full object-cover"
                       />
@@ -521,7 +484,7 @@ function DepotAnnonceForm() {
                       {/* SUPPRIMER */}
                       <button
                         type="button"
-                        onClick={() => handleRemovePhoto(index)}
+                        onClick={() => gererSuppressionPhoto(index)}
                         className="absolute right-1 top-1 flex h-7 w-7 items-center justify-center rounded-full bg-black/70 text-sm font-bold text-white transition hover:bg-red-600"
                         aria-label={`Supprimer ${photo.name}`}
                       >
@@ -546,30 +509,30 @@ function DepotAnnonceForm() {
 
         {/* MESSAGES */}
         <div className="mt-4 shrink-0">
-          {error && (
+          {erreur && (
             <p
               role="alert"
               className="mb-3 rounded-[9px] bg-[#FFF1F1] px-4 py-2.5 text-sm text-[#B42318]"
             >
-              {error}
+              {erreur}
             </p>
           )}
 
-          {success && (
+          {succes && (
             <p
               role="status"
               className="mb-3 rounded-[9px] bg-green-50 px-4 py-2.5 text-sm text-green-700"
             >
-              {success}
+              {succes}
             </p>
           )}
 
           <button
             type="submit"
-            disabled={loading || loadingData}
+            disabled={chargement || chargementDonnees}
             className="h-11 w-full rounded-[9px] bg-[#0066CC] px-6 text-sm font-semibold text-white transition hover:opacity-90 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? "Publication en cours..." : "Publier l'annonce"}
+            {chargement ? "Publication en cours..." : "Publier l'annonce"}
           </button>
         </div>
       </form>

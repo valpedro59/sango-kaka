@@ -1,12 +1,9 @@
 import DepotAnnonceForm from "../components/DepotAnnonceForm";
-import Navigation from "../components/Navigation";
-function DepotAnnoncePage() {
+
+export default function DepotAnnoncePage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navigation />
+    <div className="min-h-screen bg-white">
       <DepotAnnonceForm />
-    </main>
+    </div>
   );
 }
-
-export default DepotAnnoncePage;
