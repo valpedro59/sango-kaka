@@ -1,4 +1,4 @@
-import StarRating from "./StarRating";
+import NoteEtoiles from "./NoteEtoiles";
 
 export default function ListeAvis({ reviews }) {
   if (!reviews.length) return null;
@@ -15,7 +15,7 @@ export default function ListeAvis({ reviews }) {
               <p className="text-sm font-semibold text-neutral-900">
                 {review.authorName}
               </p>
-              <StarRating rating={review.note} />
+              <NoteEtoiles note={review.note} />
             </div>
             <p className="mt-1 text-sm leading-relaxed text-neutral-500">
               {review.commentaire}

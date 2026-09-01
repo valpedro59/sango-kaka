@@ -1,4 +1,4 @@
-import StarRating from "./StarRating";
+import NoteEtoiles from "./NoteEtoiles";
 import { buildWhatsAppLink } from "../utils/whatsapp";
 import { formatMemberSince } from "../utils/formatage";
 
@@ -29,7 +29,7 @@ export default function CarteVendeur({ seller, averageRating }) {
       </div>
 
       <div className="mt-4 flex items-center gap-2">
-        <StarRating rating={averageRating} />
+        <NoteEtoiles note={averageRating} />
         <span className="font-tag text-xs text-neutral-500">
           {averageRating > 0 ? averageRating.toFixed(1) : "Aucune note"}
         </span>

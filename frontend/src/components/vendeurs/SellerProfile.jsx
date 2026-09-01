@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import SellerRating from "./SellerRating";
+import NoteEtoiles from "../NoteEtoiles";
 import ReviewCard from "./ReviewCard";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 // Pour le moment, on affiche le profil de cet utilisateur.
 // Plus tard, cet ID pourra venir de l'URL.
@@ -206,7 +206,7 @@ function SellerProfile() {
                 Note moyenne
               </p>
 
-              <SellerRating note={Number(noteMoyenneFormatee)} />
+              <NoteEtoiles note={Number(noteMoyenneFormatee)} afficherValeur />
             </div>
           </div>
 

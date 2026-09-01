@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import SellerRating from "./SellerRating";
+import NoteEtoiles from "../NoteEtoiles";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 function ReviewCard({ avis }) {
   const [auteur, setAuteur] = useState(null);
@@ -82,7 +82,7 @@ function ReviewCard({ avis }) {
         </div>
 
         {/* NOTE */}
-        <SellerRating note={avis.note} />
+        <NoteEtoiles note={avis.note} />
       </div>
 
       {/* COMMENTAIRE */}
