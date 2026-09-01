@@ -292,10 +292,6 @@ function DepotAnnonceForm() {
         <header className="mb-5 shrink-0">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <span className="text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl">
-                Sango·Kaka
-              </span>
-
               <h1 className="mt-1 font-['Bricolage_Grotesque'] text-3xl font-extrabold leading-tight text-[#1D1D1F] sm:text-4xl">
                 Déposer une annonce
               </h1>

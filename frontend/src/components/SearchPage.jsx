@@ -101,7 +101,11 @@ function SearchPage() {
             </div>
 
             <div className="flex items-center gap-3">
-              <button className="btn-secondary">Connexion</button>
+              <button className="btn-secondary"
+                onClick={()=>navigate("/connexion")}
+              >
+                Connexion
+              </button>
               <button 
                 className="btn-primary"
                 onClick={() => navigate("/depot-annonce")}
