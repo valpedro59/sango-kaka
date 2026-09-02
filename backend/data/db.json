@@ -482,6 +482,39 @@
       "vues": 4,
       "dateCreation": "2026-08-29T12:00:00Z",
       "dateMaj": "2026-08-29T12:00:00Z"
+    },
+    {
+      "id": "t_uYIYW"
+    },
+    {
+      "id": "annonce-1788295745716",
+      "titre": "Iphone 17 air",
+      "description": "L'iPhone Air (ou iPhone 17 Air) est l'iPhone le plus fin jamais créé par Apple, avec une épaisseur record de 5,6 mm et un poids plume de 165 g.",
+      "prix": 850000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-005",
+      "vendeurId": "utilisateur-001",
+      "image": "http://localhost:3000/images/1788295745674-i17.jpeg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 1,
+      "dateCreation": "2026-09-01T20:49:05.716Z",
+      "dateMaj": null
+    },
+    {
+      "id": "annonce-1788296001109",
+      "titre": "honda nt1100",
+      "description": "La Honda NT1100 est une moto de type routière Grand Tourisme (GT) polyvalente et moderne, conçue pour enchaîner les kilomètres avec un grand confort.",
+      "prix": 9780000,
+      "categorieId": "categorie-003",
+      "quartierId": "quartier-002",
+      "vendeurId": "utilisateur-001",
+      "image": "http://localhost:3000/images/1788296001077-honda.jpeg",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 1,
+      "dateCreation": "2026-09-01T20:53:21.109Z",
+      "dateMaj": null
     }
   ],
   "avis": [
