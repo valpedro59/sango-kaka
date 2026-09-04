@@ -3,6 +3,7 @@ import { AnnonceAPI, CategorieAPI, QuartierAPI } from "../services/api";
 
 export default function useAnnonces(filtres = {}) {
   const [annonces, setAnnonces] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState(null);
 
@@ -13,7 +14,7 @@ export default function useAnnonces(filtres = {}) {
       setChargement(true);
       setErreur(null);
       try {
-        const [donneesAnnonces, categories, quartiers] = await Promise.all([
+        const [donneesAnnonces, donneesCategories, quartiers] = await Promise.all([
           AnnonceAPI.getAll(filtres),
           CategorieAPI.getAll(),
           QuartierAPI.getAll(),
@@ -21,7 +22,9 @@ export default function useAnnonces(filtres = {}) {
 
         if (annule) return;
 
-        const mapCategories = Object.fromEntries(categories.map((c) => [c.id, c.nom]));
+        const mapCategories = Object.fromEntries(
+          donneesCategories.map((c) => [c.id, c.nom])
+        );
         const mapQuartiers = Object.fromEntries(quartiers.map((q) => [q.id, q.nom]));
 
         const annoncesEnrichies = donneesAnnonces.map((annonce) => ({
@@ -31,6 +34,7 @@ export default function useAnnonces(filtres = {}) {
         }));
 
         setAnnonces(annoncesEnrichies);
+        setCategories(donneesCategories);
       } catch (err) {
         if (!annule) setErreur(err.message);
       } finally {
@@ -44,5 +48,5 @@ export default function useAnnonces(filtres = {}) {
     };
   }, [JSON.stringify(filtres)]);
 
-  return { annonces, chargement, erreur };
+  return { annonces, categories, chargement, erreur };
 }

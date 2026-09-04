@@ -102,7 +102,10 @@ export default function FicheAnnoncePage() {
 
             <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-neutral-500">
               {nomQuartier && (
-                <span className="font-tag text-[11px] uppercase tracking-[0.14em]">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-500 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
+                  <svg viewBox="0 0 20 20" fill="currentColor" className="h-3 w-3">
+                    <path fillRule="evenodd" d="M9.546 19.045a.75.75 0 01.75-.75h.013a.75.75 0 010 1.5h-.013a.75.75 0 01-.75-.75zM10.75 19.424a.75.75 0 01.75-.75h.013a.75.75 0 010 1.5h-.013a.75.75 0 01-.75-.75zM11.954 19.804a.75.75 0 01.75-.75h.013a.75.75 0 010 1.5h-.013a.75.75 0 01-.75-.75zM9.546 18.4a.75.75 0 010 1.5h-.013a.75.75 0 010-1.5h.013zM5.222 2.09a.75.75 0 01.75.75v9.5a.75.75 0 01-1.5 0V2.84a.75.75 0 01.75-.75zM15.333 2.09a.75.75 0 01.75.75v9.5a.75.75 0 01-1.5 0v-9.5a.75.75 0 01.75-.75zM8.223 6.094a.75.75 0 010 1.5H5.972a.75.75 0 010-1.5H8.223zM10 12.754a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75z" clipRule="evenodd" />
+                  </svg>
                   {nomQuartier}
                 </span>
               )}
@@ -146,6 +149,14 @@ export default function FicheAnnoncePage() {
 
         <aside className="space-y-6">
           <CarteVendeur vendeur={vendeur} noteMoyenne={noteMoyenne} />
+          {vendeur?.id && (
+            <button
+              onClick={() => naviguer(`/vendeur/${vendeur.id}`)}
+              className="btn-secondary w-full"
+            >
+              Voir profil
+            </button>
+          )}
           <ListeAvis avis={avis} />
         </aside>
       </div>
