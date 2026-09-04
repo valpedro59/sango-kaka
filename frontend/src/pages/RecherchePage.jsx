@@ -90,7 +90,7 @@ export default function RecherchePage() {
                         onClick={() => allerVersCategorie(categorie.slug)}
                         className={`chip transition ${
                           estSelectionne
-                            ? "border-brand-100 bg-brand-50 text-brand-500 shadow-sm"
+                            ? "border-brand-500 bg-brand-500 text-white shadow-sm"
                             : "border-neutral-200 bg-neutral-50 text-neutral-500 hover:border-brand-100 hover:bg-brand-50 hover:text-brand-500"
                         }`}
                       >
@@ -115,7 +115,7 @@ export default function RecherchePage() {
                         onClick={() => setBudgetSelectionne(estSelectionne ? null : tranche)}
                         className={`flex w-full items-center justify-between rounded-[12px] border px-3 py-2 text-left text-sm transition ${
                           estSelectionne
-                            ? "border-brand-100 bg-brand-50 text-brand-500 shadow-sm"
+                            ? "border-brand-500 bg-brand-500 text-white shadow-sm"
                             : "border-neutral-200 bg-neutral-50 text-neutral-600 hover:border-brand-100 hover:bg-brand-50 hover:text-brand-500"
                         }`}
                       >
