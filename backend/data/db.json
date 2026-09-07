@@ -107,6 +107,18 @@
       "bio": "",
       "estVerifie": false,
       "dateCreation": "2026-09-01T15:12:23.326Z"
+    },
+    {
+      "id": "utilisateur-1788447553071",
+      "prenom": "Louissel",
+      "nom": "KITSORO",
+      "telephone": "+242068069454",
+      "whatsapp": "+242068069454",
+      "email": null,
+      "avatar": null,
+      "bio": "",
+      "estVerifie": false,
+      "dateCreation": "2026-09-03T14:59:13.071Z"
     }
   ],
   "categories": [
@@ -512,7 +524,7 @@
       "image": "http://localhost:3000/images/1788296001077-honda.jpeg",
       "statut": "active",
       "estEnAvant": false,
-      "vues": 1,
+      "vues": 2,
       "dateCreation": "2026-09-01T20:53:21.109Z",
       "dateMaj": null
     }

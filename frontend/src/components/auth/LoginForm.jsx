@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -28,11 +27,8 @@ function LoginForm() {
         );
       }
 
-      // Recherche de l'utilisateur
       const response = await fetch(
-        `${API_URL}/utilisateurs?telephone=${encodeURIComponent(
-          numero
-        )}`
+        `${API_URL}/utilisateurs?telephone=${encodeURIComponent(numero)}`
       );
 
       if (!response.ok) {
@@ -43,21 +39,27 @@ function LoginForm() {
 
       const utilisateurs = await response.json();
 
-      // Utilisateur inexistant
       if (utilisateurs.length === 0) {
         throw new Error(
           "Aucun compte ne correspond à ce numéro de téléphone."
         );
       }
 
-      // Utilisateur trouvé
       const utilisateur = utilisateurs[0];
 
       console.log("Utilisateur connecté :", utilisateur);
 
+      // Sauvegarder l'utilisateur connecté
+      localStorage.setItem(
+        "utilisateurConnecte",
+        JSON.stringify(utilisateur)
+      );
+
+      // Prévenir les autres composants que l'état de connexion a changé
+      window.dispatchEvent(new Event("connexionChangee"));
+
       setSuccess(`Bienvenue ${utilisateur.prenom} !`);
 
-      // Redirection vers Home
       setTimeout(() => {
         navigate("/");
       }, 1000);
@@ -151,4 +153,3 @@ function LoginForm() {
 }
 
 export default LoginForm;
-
