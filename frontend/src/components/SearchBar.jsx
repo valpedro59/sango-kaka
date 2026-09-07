@@ -1,9 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function SearchBar({ compacte }) {
   const [requete, setRequete] = useState("");
   const naviguer = useNavigate();
+  const emplacement = useLocation();
+
+  useEffect(() => {
+    setRequete("");
+  }, [emplacement]);
 
   function gererSoumission(evenement) {
     evenement.preventDefault();
