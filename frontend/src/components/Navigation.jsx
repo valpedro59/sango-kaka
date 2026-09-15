@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
@@ -6,9 +7,12 @@ import SearchBar from "./SearchBar";
 export default function Navigation() {
   const naviguer = useNavigate();
   const [menuOuvert, setMenuOuvert] = useState(false);
+  const [menuProfilOuvert, setMenuProfilOuvert] = useState(false);
+  const [estConnecte, setEstConnecte] = useState(true); // Fake state for frontend
 
   function fermerMenu() {
     setMenuOuvert(false);
+    setMenuProfilOuvert(false);
   }
 
   return (
@@ -41,12 +45,51 @@ export default function Navigation() {
             Explorer
           </button>
 
-          <button
-            className="btn-secondary"
-            onClick={() => naviguer("/connexion")}
-          >
-            Connexion
-          </button>
+          {estConnecte ? (
+            <div className="relative">
+              <button
+                onClick={() => setMenuProfilOuvert(!menuProfilOuvert)}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-neutral-600 hover:bg-neutral-200 transition"
+                aria-label="Menu profil"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                  <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+                </svg>
+              </button>
+              
+              {menuProfilOuvert && (
+                <div className="absolute right-0 mt-2 w-48 rounded-xl border border-neutral-100 bg-white shadow-lg overflow-hidden">
+                  <div className="p-2 flex flex-col gap-1">
+                    <button
+                      onClick={() => {
+                        naviguer("/profil");
+                        setMenuProfilOuvert(false);
+                      }}
+                      className="block w-full rounded-lg px-4 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-50 transition"
+                    >
+                      Mon profil
+                    </button>
+                    <button
+                      onClick={() => {
+                        setEstConnecte(false);
+                        setMenuProfilOuvert(false);
+                      }}
+                      className="block w-full rounded-lg px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition"
+                    >
+                      Déconnexion
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              className="btn-secondary"
+              onClick={() => naviguer("/connexion")}
+            >
+              Connexion
+            </button>
+          )}
 
           <button
             className="btn-primary"
@@ -115,15 +158,38 @@ export default function Navigation() {
               Explorer
             </button>
 
-            <button
-              onClick={() => {
-                naviguer("/connexion");
-                fermerMenu();
-              }}
-              className="btn-secondary w-full"
-            >
-              Connexion
-            </button>
+            {estConnecte ? (
+              <>
+                <button
+                  onClick={() => {
+                    naviguer("/profil");
+                    fermerMenu();
+                  }}
+                  className="nav-link w-full rounded-xl px-4 py-3 text-left"
+                >
+                  Mon profil
+                </button>
+                <button
+                  onClick={() => {
+                    setEstConnecte(false);
+                    fermerMenu();
+                  }}
+                  className="nav-link w-full rounded-xl px-4 py-3 text-left text-red-600 hover:bg-red-50"
+                >
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={() => {
+                  naviguer("/connexion");
+                  fermerMenu();
+                }}
+                className="btn-secondary w-full"
+              >
+                Connexion
+              </button>
+            )}
 
             <button
               onClick={() => {
@@ -141,4 +207,5 @@ export default function Navigation() {
     </nav>
   );
 }
+
 
