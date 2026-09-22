@@ -23,13 +23,12 @@ export default function annoncesRoutes(db) {
   const router = express.Router();
 
   // POST /api/annonces/avec-image
-  router.post("/avec-image", upload.single("image"), (req, res) => {
+  router.post("/avec-image", upload.array("images", 5), (req, res) => {
     const { titre, prix } = req.body;
 
-    // CORRECTION : Utilisation de /images/ à la place de /uploads/
     const imageUrl = req.file
-      ? `http://localhost:3000/images/${req.file.filename}`
-      : `http://localhost:3000/images/default.jpg`;
+      ? `/images/${req.file.filename}`
+      : `/images/default.jpg`;
 
     // Récupération sécurisée du reste des champs si présents dans req.body
     const nouvelleAnnonce = {
