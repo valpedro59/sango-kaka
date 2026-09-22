@@ -4,8 +4,8 @@
       "id": "utilisateur-001",
       "prenom": "Val",
       "nom": "Pedro",
-      "telephone": "+242060000001",
-      "whatsapp": "+242060000001",
+      "telephone": "+242069861803",
+      "whatsapp": "+242069861803",
       "email": "val@example.com",
       "avatar": "https://i.pravatar.cc/150?u=utilisateur-001",
       "bio": "Vendeur de téléphones et accessoires",
@@ -526,6 +526,21 @@
       "estEnAvant": false,
       "vues": 2,
       "dateCreation": "2026-09-01T20:53:21.109Z",
+      "dateMaj": null
+    },
+    {
+      "id": "annonce-1788767210493",
+      "titre": "Benie",
+      "description": "Benie est un mannequin sino-congolaise nee a Pointe-Noire qui vit actuellement en Chine",
+      "prix": 200000,
+      "categorieId": "categorie-001",
+      "quartierId": "quartier-002",
+      "vendeurId": "utilisateur-001",
+      "image": "http://localhost:3000/images/1788767210484-IMG_4220.WEBP",
+      "statut": "active",
+      "estEnAvant": false,
+      "vues": 1,
+      "dateCreation": "2026-09-07T07:46:50.493Z",
       "dateMaj": null
     }
   ],
