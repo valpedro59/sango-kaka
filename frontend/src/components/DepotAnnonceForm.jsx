@@ -6,7 +6,7 @@ import {
   QuartierAPI,
 } from "../services/api";
 
-const NOMBRE_MAX_PHOTOS = 1;
+const NOMBRE_MAX_PHOTOS = 5;
 const TAILLE_MAX_FICHIER = 5 * 1024 * 1024; // 5 MB
 
 function DepotAnnonceForm() {
@@ -37,13 +37,11 @@ function DepotAnnonceForm() {
         setChargementDonnees(true);
         setErreur("");
 
-        const [
-          donneesCategories,
-          donneesQuartiers,
-        ] = await Promise.all([
-          CategorieAPI.getAll(),
-          QuartierAPI.getAll(),
-        ]);
+        const [donneesCategories, donneesQuartiers] =
+          await Promise.all([
+            CategorieAPI.getAll(),
+            QuartierAPI.getAll(),
+          ]);
 
         setCategories(donneesCategories);
         setQuartiers(donneesQuartiers);
@@ -75,7 +73,7 @@ function DepotAnnonceForm() {
   }
 
   /* =====================================================
-     AJOUT DE LA PHOTO
+     AJOUT DES PHOTOS
      ===================================================== */
 
   function gererChangementPhotos(evenement) {
@@ -90,54 +88,79 @@ function DepotAnnonceForm() {
     setErreur("");
     setSucces("");
 
-    // Le backend actuel accepte UNE seule image.
-    if (fichiersSelectionnes.length > NOMBRE_MAX_PHOTOS) {
+    const nombrePhotosActuelles =
+      donneesFormulaire.photos.length;
+
+    const nombreDisponible =
+      NOMBRE_MAX_PHOTOS - nombrePhotosActuelles;
+
+    if (nombreDisponible <= 0) {
       setErreur(
-        "Vous pouvez ajouter une seule photo pour le moment."
+        `Vous avez déjà atteint la limite de ${NOMBRE_MAX_PHOTOS} photos.`
       );
 
       evenement.target.value = "";
       return;
     }
 
-    const fichier = fichiersSelectionnes[0];
-
-    // Vérification du type
-    if (!fichier.type.startsWith("image/")) {
+    if (fichiersSelectionnes.length > nombreDisponible) {
       setErreur(
-        `Le fichier "${fichier.name}" n'est pas une image valide.`
+        `Vous pouvez encore ajouter seulement ${nombreDisponible} photo${
+          nombreDisponible > 1 ? "s" : ""
+        }.`
       );
 
       evenement.target.value = "";
       return;
     }
 
-    // Vérification de la taille
-    if (fichier.size > TAILLE_MAX_FICHIER) {
-      setErreur(
-        `La photo "${fichier.name}" dépasse la taille maximale de 5 MB.`
-      );
+    const fichiersValides = [];
 
-      evenement.target.value = "";
-      return;
+    for (const fichier of fichiersSelectionnes) {
+      /* Vérification du type */
+      if (!fichier.type.startsWith("image/")) {
+        setErreur(
+          `Le fichier "${fichier.name}" n'est pas une image valide.`
+        );
+
+        evenement.target.value = "";
+        return;
+      }
+
+      /* Vérification de la taille */
+      if (fichier.size > TAILLE_MAX_FICHIER) {
+        setErreur(
+          `La photo "${fichier.name}" dépasse la taille maximale de 5 MB.`
+        );
+
+        evenement.target.value = "";
+        return;
+      }
+
+      fichiersValides.push(fichier);
     }
 
     setDonneesFormulaire((donneesPrecedentes) => ({
       ...donneesPrecedentes,
-      photos: [fichier],
+      photos: [
+        ...donneesPrecedentes.photos,
+        ...fichiersValides,
+      ],
     }));
 
     evenement.target.value = "";
   }
 
   /* =====================================================
-     SUPPRESSION PHOTO
+     SUPPRESSION D'UNE PHOTO
      ===================================================== */
 
-  function gererSuppressionPhoto() {
+  function gererSuppressionPhoto(indexPhoto) {
     setDonneesFormulaire((donneesPrecedentes) => ({
       ...donneesPrecedentes,
-      photos: [],
+      photos: donneesPrecedentes.photos.filter(
+        (_, index) => index !== indexPhoto
+      ),
     }));
 
     setErreur("");
@@ -244,28 +267,13 @@ function DepotAnnonceForm() {
         "utilisateur-001"
       );
 
-      /*
-       * Le backend définit lui-même :
-       * statut
-       * estEnAvant
-       * vues
-       * id
-       * dateCreation
-       * dateMaj
-       *
-       * On n'a donc pas besoin de les envoyer.
-       */
-
       /* -----------------------------
-         IMAGE
+         IMAGES
          ----------------------------- */
 
-      if (donneesFormulaire.photos.length > 0) {
-        donnees.append(
-          "image",
-          donneesFormulaire.photos[0]
-        );
-      }
+      donneesFormulaire.photos.forEach((photo) => {
+        donnees.append("images", photo);
+      });
 
       /* -----------------------------
          ENVOI
@@ -495,11 +503,11 @@ function DepotAnnonceForm() {
           <section className="flex min-h-[300px] flex-col rounded-[14px] bg-[#F5F5F7] p-4 sm:p-5 lg:min-h-0">
             <div>
               <h2 className="font-['Bricolage_Grotesque'] text-xl font-bold text-[#1D1D1F]">
-                Photo
+                Photos
               </h2>
 
               <p className="mt-1 text-sm text-[#6E6E73]">
-                Ajoutez une photo pour présenter votre article.
+                Ajoutez jusqu'à 5 photos pour présenter votre article.
               </p>
             </div>
 
@@ -509,28 +517,35 @@ function DepotAnnonceForm() {
               id="photos"
               type="file"
               accept="image/jpeg,image/png,image/webp"
+              multiple
               onChange={gererChangementPhotos}
               className="hidden"
             />
 
             {/* ZONE D'AJOUT */}
 
-            <label
-              htmlFor="photos"
-              className="mt-4 flex min-h-[220px] flex-1 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#B8B8BD] bg-white px-4 text-[#6E6E73] transition hover:border-[#0066CC] hover:text-[#0066CC] sm:min-h-[260px] lg:min-h-0"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0066CC] text-3xl leading-none text-white">
-                +
-              </span>
+            {donneesFormulaire.photos.length < NOMBRE_MAX_PHOTOS && (
+              <label
+                htmlFor="photos"
+                className="mt-4 flex min-h-[180px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-[#B8B8BD] bg-white px-4 text-[#6E6E73] transition hover:border-[#0066CC] hover:text-[#0066CC]"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0066CC] text-3xl leading-none text-white">
+                  +
+                </span>
 
-              <span className="text-sm font-medium">
-                Ajouter une photo
-              </span>
+                <span className="text-sm font-medium">
+                  Ajouter des photos
+                </span>
 
-              <span className="text-center text-xs text-[#9A9AA0]">
-                JPG, PNG ou WEBP — maximum 5 MB
-              </span>
-            </label>
+                <span className="text-center text-xs text-[#9A9AA0]">
+                  JPG, PNG ou WEBP — maximum 5 MB par image
+                </span>
+
+                <span className="text-xs font-semibold text-[#0066CC]">
+                  {donneesFormulaire.photos.length} / 5 photos
+                </span>
+              </label>
+            )}
 
             {/* APERÇU */}
 
@@ -538,34 +553,37 @@ function DepotAnnonceForm() {
               <div className="mt-4">
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-xs font-semibold text-[#1D1D1F]">
-                    Photo sélectionnée
+                    Photos sélectionnées
                   </span>
 
                   <span className="text-xs text-[#9A9AA0]">
-                    1 / 1
+                    {donneesFormulaire.photos.length} /{" "}
+                    {NOMBRE_MAX_PHOTOS}
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 gap-3">
+                <div className="grid grid-cols-2 gap-3">
                   {donneesFormulaire.photos.map(
                     (photo, index) => (
                       <div
-                        key={`${photo.name}-${index}`}
+                        key={`${photo.name}-${photo.lastModified}-${index}`}
                         className="group relative overflow-hidden rounded-lg border border-[#D2D2D7] bg-white"
                       >
                         <img
                           src={obtenirApercuPhoto(photo)}
                           alt={`Aperçu ${index + 1}`}
-                          className="h-40 w-full object-cover"
+                          className="h-32 w-full object-cover"
                         />
 
                         <span className="absolute bottom-2 left-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                          1
+                          {index + 1}
                         </span>
 
                         <button
                           type="button"
-                          onClick={gererSuppressionPhoto}
+                          onClick={() =>
+                            gererSuppressionPhoto(index)
+                          }
                           className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/70 text-sm font-bold text-white transition hover:bg-red-600"
                           aria-label={`Supprimer ${photo.name}`}
                         >
@@ -583,8 +601,9 @@ function DepotAnnonceForm() {
             <div className="mt-4 rounded-[10px] bg-white p-3">
               <p className="text-xs leading-relaxed text-[#6E6E73]">
                 Une bonne photo permet aux acheteurs de mieux
-                évaluer votre article. Formats acceptés : JPG,
-                PNG et WEBP. Taille maximale : 5 MB.
+                évaluer votre article. Vous pouvez ajouter jusqu'à
+                5 photos. Formats acceptés : JPG, PNG et WEBP.
+                Taille maximale : 5 MB par image.
               </p>
             </div>
           </section>
@@ -629,4 +648,3 @@ function DepotAnnonceForm() {
 }
 
 export default DepotAnnonceForm;
-
