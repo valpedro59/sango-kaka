@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import CustomDropdown from "./DropdownButton";
+import CustomButon from "./CustomButon";
+import { Plus } from "lucide-react";
 
 export default function Navigation() {
   const naviguer = useNavigate();
@@ -35,10 +38,7 @@ export default function Navigation() {
     window.addEventListener("connexionChangee", verifierConnexion);
 
     return () => {
-      window.removeEventListener(
-        "connexionChangee",
-        verifierConnexion
-      );
+      window.removeEventListener("connexionChangee", verifierConnexion);
     };
   }, []);
 
@@ -57,15 +57,22 @@ export default function Navigation() {
     naviguer("/connexion");
     fermerMenu();
   }
+  async function voirProfile() {
+    if (!utilisateurConnecte || !utilisateurConnecte.id) {
+      console.warn("Utilisateur pas encore chargé ou introuvable.");
+      return;
+    }
+    await naviguer(`/vendeur/${utilisateurConnecte.id}`);
+    fermerMenu();
+  }
 
   return (
     <nav className="sticky top-0 z-50 border-b border-neutral-100 bg-white/80 backdrop-blur-lg">
       <div className="container-shell flex items-center gap-4 py-3">
-
         {/* LOGO */}
         <Link
           to="/"
-          className="flex flex-shrink-0 items-center gap-2.5"
+          className="flex shrink-0 items-center gap-2.5"
           onClick={fermerMenu}
         >
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 text-sm font-extrabold text-white">
@@ -73,7 +80,8 @@ export default function Navigation() {
           </div>
 
           <span className="text-xl font-extrabold tracking-tight text-neutral-900">
-            Sango<span className="text-brand-500">&middot;</span>Kaka
+            Sango
+            <span className="text-brand-500"> Kaka</span>
           </span>
         </Link>
 
@@ -83,37 +91,28 @@ export default function Navigation() {
         </div>
 
         {/* MENU DESKTOP */}
-        <div className="hidden flex-shrink-0 items-center gap-3 sm:flex">
-
-          <button
-            onClick={() => naviguer("/")}
-            className="nav-link"
-          >
+        <div className="hidden shrink-0 items-center gap-3 sm:flex">
+          <button onClick={() => naviguer("/")} className="nav-link">
             Explorer
           </button>
 
           {utilisateurConnecte ? (
-            <button
-              className="btn-secondary"
-              onClick={gererDeconnexion}
-            >
-              Déconnexion
-            </button>
+            <CustomDropdown
+              user={utilisateurConnecte}
+              onProfile={voirProfile}
+              onLogout={gererDeconnexion}
+            />
           ) : (
-            <button
-              className="btn-secondary"
-              onClick={allerConnexion}
-            >
-              Connexion
+            <button className="btn-secondary" onClick={allerConnexion}>
+              Se connecter
             </button>
           )}
-
-          <button
-            className="btn-primary"
+          <CustomButon
             onClick={() => naviguer("/depot-annonce")}
+            icon={<Plus />}
           >
             Déposer annonce
-          </button>
+          </CustomButon>
         </div>
 
         {/* BOUTON BURGER MOBILE */}
@@ -121,11 +120,7 @@ export default function Navigation() {
           type="button"
           onClick={() => setMenuOuvert(!menuOuvert)}
           className="ml-auto flex h-10 w-10 items-center justify-center rounded-xl text-neutral-900 transition hover:bg-neutral-100 sm:hidden"
-          aria-label={
-            menuOuvert
-              ? "Fermer le menu"
-              : "Ouvrir le menu"
-          }
+          aria-label={menuOuvert ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOuvert}
         >
           {menuOuvert ? (
@@ -166,7 +161,6 @@ export default function Navigation() {
       {menuOuvert && (
         <div className="border-t border-neutral-100 bg-white px-5 py-4 shadow-sm sm:hidden">
           <div className="flex flex-col gap-3">
-
             <button
               onClick={() => {
                 naviguer("/");
@@ -185,10 +179,7 @@ export default function Navigation() {
                 Déconnexion
               </button>
             ) : (
-              <button
-                onClick={allerConnexion}
-                className="btn-secondary w-full"
-              >
+              <button onClick={allerConnexion} className="btn-secondary w-full">
                 Connexion
               </button>
             )}
@@ -202,7 +193,6 @@ export default function Navigation() {
             >
               Déposer annonce
             </button>
-
           </div>
         </div>
       )}

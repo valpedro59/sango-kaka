@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { formaterPrix } from "../utils/formatage";
+import { MapPin, Pin } from "lucide-react";
 
 export default function CarteAnnonce({ annonce }) {
   const naviguer = useNavigate();
@@ -24,18 +25,25 @@ export default function CarteAnnonce({ annonce }) {
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-3">
+        <div className="absolute inset-x-0 top-0 flex items-end justify-between p-3">
           <span className="badge">{annonce.nomCategorie}</span>
         </div>
       </div>
 
       <div className="flex flex-1 flex-col p-4">
-        <span className="font-tag text-[11px] uppercase tracking-[0.14em] text-neutral-500">
+        <span className="flex items-center gap-1 font-tag text-[11px] uppercase tracking-[0.14em] text-neutral-500">
+          <span>
+            <MapPin size={16} />
+          </span>
           {annonce.nomQuartier}
         </span>
 
-        <h3 className="mt-3 text-lg font-extrabold text-neutral-900">{annonce.titre}</h3>
-        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-6 text-neutral-500">{annonce.description}</p>
+        <h3 className="mt-3 text-lg font-extrabold text-neutral-900">
+          {annonce.titre}
+        </h3>
+        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-6 text-neutral-500">
+          {annonce.description}
+        </p>
 
         <div className="mt-4 flex items-center justify-between gap-3">
           <span className="font-tag text-lg font-bold text-brand-500">

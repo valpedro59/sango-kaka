@@ -116,20 +116,28 @@
   .section-subtitle {
     @apply mt-2 text-sm text-neutral-500 sm:text-base;
   }
-
+  .btn {
+    @apply inline-flex items-center justify-center font-semibold rounded-xl select-none cursor-pointer;
+  }
   /* CTA principal : accent bleu */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-[12px] bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-100;
   }
 
   /* CTA secondaire : surface blanche */
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-[12px] border border-neutral-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-neutral-300 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-neutral-300 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-200;
+  }
+  .dropdown {
+    @apply relative;
+  }
+  .dropdown-menu {
+    @apply absolute z-10 min-w-full mt-1 left-1/2 -translate-x-1/2 bg-white border-neutral-300 rounded-lg shadow-lg text-sm font-semibold text-neutral-900;
   }
 
   /* Bouton WhatsApp : vert réservé et distinct */
   .btn-whatsapp {
-    @apply inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#1FA766] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#178d56] focus:outline-none focus:ring-2 focus:ring-emerald-100;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-whatsapp-600 focus:outline-none focus:ring-2 focus:ring-emerald-100;
   }
 
   /* Badge d’état, catégorie ou signal */
@@ -144,12 +152,12 @@
 
   /* Champs de saisie standard */
   .input-field {
-    @apply w-full rounded-[12px] border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+    @apply w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
   }
 
   /* Zone de texte multi-ligne */
   .textarea-field {
-    @apply min-h-[110px] w-full rounded-[12px] border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+    @apply min-h-[110px] w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-500 shadow-sm outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
   }
 
   /* Indicateur d’état actif */
